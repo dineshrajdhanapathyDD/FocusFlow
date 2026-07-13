@@ -1,217 +1,97 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { z } from 'zod';
+import Parser from 'rss-parser';
 import { store } from '../store.js';
 
-// ===== AWS Content Types =====
-interface AWSArticle {
-  id: string;
+const rssParser = new Parser({
+  timeout: 10000,
+  headers: { 'User-Agent': 'FocusFlow-MCP/1.0' },
+});
+
+// AWS RSS Feed URLs
+const AWS_FEEDS = {
+  blog: 'https://aws.amazon.com/blogs/aws/feed/',
+  whats_new: 'https://aws.amazon.com/about-aws/whats-new/recent/feed/',
+  machine_learning: 'https://aws.amazon.com/blogs/machine-learning/feed/',
+  compute: 'https://aws.amazon.com/blogs/compute/feed/',
+  database: 'https://aws.amazon.com/blogs/database/feed/',
+  devops: 'https://aws.amazon.com/blogs/devops/feed/',
+  architecture: 'https://aws.amazon.com/blogs/architecture/feed/',
+  security: 'https://aws.amazon.com/blogs/security/feed/',
+  opensource: 'https://aws.amazon.com/blogs/opensource/feed/',
+  serverless: 'https://aws.amazon.com/blogs/compute/feed/',
+};
+
+// AWS Events RSS
+const AWS_EVENTS_URL = 'https://aws.amazon.com/events/feed/';
+
+interface FeedItem {
   title: string;
-  url: string;
-  category: string;
-  date: string;
-  summary: string;
-  tags: string[];
-  source: 'blog' | 'whats_new' | 'announcement' | 'event';
+  link: string;
+  pubDate: string;
+  contentSnippet?: string;
+  categories?: string[];
 }
 
-interface AWSEvent {
-  id: string;
-  title: string;
-  date: string;
-  endDate?: string;
-  type: 'webinar' | 'conference' | 'workshop' | 'meetup' | 'online';
-  url: string;
-  description: string;
-  tags: string[];
-  free: boolean;
+// Cache to avoid hitting RSS too often
+const cache: Map<string, { data: FeedItem[]; timestamp: number }> = new Map();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+async function fetchFeed(url: string): Promise<FeedItem[]> {
+  const cached = cache.get(url);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+
+  try {
+    const feed = await rssParser.parseURL(url);
+    const items: FeedItem[] = (feed.items || []).map((item) => ({
+      title: item.title || 'Untitled',
+      link: item.link || '',
+      pubDate: item.pubDate || item.isoDate || new Date().toISOString(),
+      contentSnippet: item.contentSnippet?.slice(0, 200) || item.content?.slice(0, 200) || '',
+      categories: item.categories || [],
+    }));
+    cache.set(url, { data: items, timestamp: Date.now() });
+    return items;
+  } catch (error) {
+    console.error(`Failed to fetch feed ${url}:`, error);
+    return cached?.data || [];
+  }
 }
-
-// Simulated AWS content feeds (in production, fetch from RSS/APIs)
-const AWS_ARTICLES: AWSArticle[] = [
-  {
-    id: 'art-1',
-    title: 'Amazon Bedrock now supports Agents with MCP tool integration',
-    url: 'https://aws.amazon.com/blogs/machine-learning/bedrock-mcp-integration',
-    category: 'Machine Learning',
-    date: new Date(Date.now() - 86400000).toISOString().split('T')[0],
-    summary: 'Amazon Bedrock agents can now natively connect to MCP servers, enabling tool-use workflows with standardized protocol support.',
-    tags: ['bedrock', 'mcp', 'agents', 'ai'],
-    source: 'blog',
-  },
-  {
-    id: 'art-2',
-    title: 'Introducing Strands Agents SDK for building production AI agents',
-    url: 'https://aws.amazon.com/blogs/opensource/introducing-strands-agents',
-    category: 'Open Source',
-    date: new Date(Date.now() - 172800000).toISOString().split('T')[0],
-    summary: 'Strands Agents is an open source SDK that takes a model-driven approach to building AI agents in just a few lines of code.',
-    tags: ['strands', 'agents', 'open-source', 'python'],
-    source: 'blog',
-  },
-  {
-    id: 'art-3',
-    title: 'AWS Lambda now supports Node.js 22 runtime',
-    url: 'https://aws.amazon.com/about-aws/whats-new/lambda-nodejs-22',
-    category: 'Compute',
-    date: new Date(Date.now() - 259200000).toISOString().split('T')[0],
-    summary: 'You can now develop AWS Lambda functions using Node.js 22 runtime with improved performance and ESM support.',
-    tags: ['lambda', 'nodejs', 'serverless', 'compute'],
-    source: 'whats_new',
-  },
-  {
-    id: 'art-4',
-    title: 'Amazon DynamoDB zero-ETL integration with Amazon Redshift is now generally available',
-    url: 'https://aws.amazon.com/about-aws/whats-new/dynamodb-zero-etl',
-    category: 'Database',
-    date: new Date(Date.now() - 345600000).toISOString().split('T')[0],
-    summary: 'Seamlessly replicate DynamoDB data to Redshift for analytics without building ETL pipelines.',
-    tags: ['dynamodb', 'redshift', 'analytics', 'database'],
-    source: 'whats_new',
-  },
-  {
-    id: 'art-5',
-    title: 'New Amazon Nova models available in Bedrock with enhanced reasoning',
-    url: 'https://aws.amazon.com/blogs/aws/nova-enhanced-reasoning',
-    category: 'Machine Learning',
-    date: new Date(Date.now() - 432000000).toISOString().split('T')[0],
-    summary: 'Amazon Nova Pro and Nova Premier now feature improved chain-of-thought reasoning and tool-use capabilities.',
-    tags: ['nova', 'bedrock', 'llm', 'reasoning', 'ai'],
-    source: 'announcement',
-  },
-  {
-    id: 'art-6',
-    title: 'Amazon Q Developer now generates infrastructure as code from natural language',
-    url: 'https://aws.amazon.com/blogs/devops/q-developer-iac',
-    category: 'Developer Tools',
-    date: new Date(Date.now() - 518400000).toISOString().split('T')[0],
-    summary: 'Describe your infrastructure needs in plain English and Amazon Q Developer generates CloudFormation or CDK templates.',
-    tags: ['q-developer', 'iac', 'cloudformation', 'cdk', 'devtools'],
-    source: 'blog',
-  },
-  {
-    id: 'art-7',
-    title: 'AWS Cost Optimization Hub now provides automated savings recommendations',
-    url: 'https://aws.amazon.com/about-aws/whats-new/cost-optimization-hub',
-    category: 'Cloud Financial Management',
-    date: new Date(Date.now() - 604800000).toISOString().split('T')[0],
-    summary: 'The new Cost Optimization Hub aggregates savings opportunities across AWS services in a single dashboard.',
-    tags: ['cost', 'optimization', 'savings', 'finops'],
-    source: 'whats_new',
-  },
-  {
-    id: 'art-8',
-    title: 'Building production-ready agents with Strands, MCP, and Amazon Bedrock',
-    url: 'https://aws.amazon.com/blogs/machine-learning/production-agents-strands-mcp',
-    category: 'Machine Learning',
-    date: new Date(Date.now() - 691200000).toISOString().split('T')[0],
-    summary: 'A comprehensive guide to deploying autonomous AI agents using Strands SDK with MCP tool integration on AWS.',
-    tags: ['strands', 'mcp', 'bedrock', 'production', 'agents'],
-    source: 'blog',
-  },
-];
-
-const AWS_EVENTS: AWSEvent[] = [
-  {
-    id: 'evt-1',
-    title: 'AWS re:Invent 2026',
-    date: '2026-12-01',
-    endDate: '2026-12-05',
-    type: 'conference',
-    url: 'https://reinvent.awsevents.com/',
-    description: 'The largest AWS learning conference with keynotes, breakout sessions, workshops, and labs.',
-    tags: ['reinvent', 'conference', 'all-services'],
-    free: false,
-  },
-  {
-    id: 'evt-2',
-    title: 'Building AI Agents with Strands and MCP - Live Workshop',
-    date: '2026-07-22',
-    type: 'workshop',
-    url: 'https://aws.amazon.com/events/strands-mcp-workshop',
-    description: 'Hands-on workshop: Build, test, and deploy AI agents using Strands SDK with MCP tool integration.',
-    tags: ['strands', 'mcp', 'agents', 'hands-on'],
-    free: true,
-  },
-  {
-    id: 'evt-3',
-    title: 'AWS Summit Online - Generative AI Edition',
-    date: '2026-07-30',
-    type: 'online',
-    url: 'https://aws.amazon.com/events/summits/online/genai',
-    description: 'Free online event focused on generative AI services, RAG patterns, and agentic workflows.',
-    tags: ['summit', 'genai', 'bedrock', 'agents'],
-    free: true,
-  },
-  {
-    id: 'evt-4',
-    title: 'Serverless Office Hours: Lambda + Bedrock Integration',
-    date: '2026-07-17',
-    type: 'webinar',
-    url: 'https://aws.amazon.com/events/office-hours/serverless-bedrock',
-    description: 'Live Q&A on connecting Lambda functions to Bedrock for AI-powered applications.',
-    tags: ['lambda', 'bedrock', 'serverless', 'qa'],
-    free: true,
-  },
-  {
-    id: 'evt-5',
-    title: 'AWS Community Day - Cloud Native Meetup',
-    date: '2026-08-10',
-    type: 'meetup',
-    url: 'https://aws.amazon.com/events/community-day',
-    description: 'Community-led event with talks on containers, serverless, and modern application architecture.',
-    tags: ['community', 'containers', 'serverless', 'architecture'],
-    free: true,
-  },
-];
-
-const LEARNING_PATHS = [
-  { id: 'lp-1', name: 'AI/ML on AWS', services: ['bedrock', 'sagemaker', 'nova', 'strands'], level: 'intermediate' },
-  { id: 'lp-2', name: 'Serverless Development', services: ['lambda', 'api-gateway', 'dynamodb', 'step-functions'], level: 'beginner' },
-  { id: 'lp-3', name: 'Agentic AI & MCP', services: ['bedrock', 'strands', 'mcp', 'agentcore'], level: 'advanced' },
-  { id: 'lp-4', name: 'Cloud Architecture', services: ['vpc', 'ecs', 'rds', 'cloudfront'], level: 'intermediate' },
-  { id: 'lp-5', name: 'DevOps & CI/CD', services: ['codepipeline', 'cdk', 'cloudformation', 'q-developer'], level: 'intermediate' },
-];
 
 export function registerAWSNewsTools(server: McpServer) {
-  // Get latest AWS blog posts and articles
+  // Get latest AWS blog posts and articles (REAL-TIME from RSS)
   server.tool(
     'get_aws_articles',
-    'Get latest AWS blog posts, What\'s New announcements, and news articles. Filter by category, source type, or tags.',
+    'Fetch latest AWS blog posts and announcements from live RSS feeds. Sources: AWS Blog, What\'s New, Machine Learning, Compute, Database, DevOps, Architecture, Security, Open Source.',
     {
-      category: z.string().optional().describe('Filter by category: Machine Learning, Compute, Database, Developer Tools, etc.'),
-      source: z.enum(['blog', 'whats_new', 'announcement', 'event']).optional().describe('Filter by content source'),
-      tags: z.array(z.string()).optional().describe('Filter by tags (e.g., ["bedrock", "lambda"])'),
-      limit: z.number().default(10).describe('Max number of articles to return'),
+      source: z.enum(['blog', 'whats_new', 'machine_learning', 'compute', 'database', 'devops', 'architecture', 'security', 'opensource']).default('blog').describe('Which AWS feed to fetch'),
+      limit: z.number().default(10).describe('Max articles to return'),
     },
-    async ({ category, source, tags, limit }) => {
-      let articles = [...AWS_ARTICLES];
+    async ({ source, limit }) => {
+      const url = AWS_FEEDS[source];
+      const items = await fetchFeed(url);
+      const articles = items.slice(0, limit);
 
-      if (category) {
-        articles = articles.filter((a) => a.category.toLowerCase().includes(category.toLowerCase()));
+      if (articles.length === 0) {
+        return { content: [{ type: 'text' as const, text: `No articles found from ${source} feed. The feed may be temporarily unavailable.` }] };
       }
-      if (source) {
-        articles = articles.filter((a) => a.source === source);
-      }
-      if (tags && tags.length > 0) {
-        articles = articles.filter((a) => tags.some((tag) => a.tags.includes(tag.toLowerCase())));
-      }
-
-      articles = articles.slice(0, limit);
 
       return {
         content: [{
           type: 'text' as const,
           text: JSON.stringify({
+            source,
             count: articles.length,
-            articles: articles.map((a) => ({
-              id: a.id,
+            fetchedAt: new Date().toISOString(),
+            articles: articles.map((a, i) => ({
+              rank: i + 1,
               title: a.title,
-              category: a.category,
-              date: a.date,
-              summary: a.summary,
-              tags: a.tags,
-              source: a.source,
-              url: a.url,
+              url: a.link,
+              date: a.pubDate,
+              summary: a.contentSnippet,
+              tags: a.categories,
             })),
           }, null, 2),
         }],
@@ -219,205 +99,220 @@ export function registerAWSNewsTools(server: McpServer) {
     }
   );
 
-  // Get upcoming AWS events
+  // Get What's New announcements (REAL-TIME)
   server.tool(
-    'get_aws_events',
-    'Get upcoming AWS events: conferences, workshops, webinars, meetups, and online summits. Filter by type or free events.',
+    'get_aws_whats_new',
+    'Fetch the latest AWS What\'s New announcements in real-time. These are official service launches, updates, and new features.',
     {
-      type: z.enum(['webinar', 'conference', 'workshop', 'meetup', 'online']).optional().describe('Filter by event type'),
-      free_only: z.boolean().default(false).describe('Only show free events'),
-      tags: z.array(z.string()).optional().describe('Filter by topic tags'),
+      limit: z.number().default(10).describe('Number of announcements to fetch'),
     },
-    async ({ type, free_only, tags }) => {
-      let events = AWS_EVENTS.filter((e) => new Date(e.date) >= new Date());
+    async ({ limit }) => {
+      const items = await fetchFeed(AWS_FEEDS.whats_new);
+      const announcements = items.slice(0, limit);
 
-      if (type) {
-        events = events.filter((e) => e.type === type);
-      }
-      if (free_only) {
-        events = events.filter((e) => e.free);
-      }
-      if (tags && tags.length > 0) {
-        events = events.filter((e) => tags.some((tag) => e.tags.includes(tag.toLowerCase())));
-      }
-
-      events.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-      return {
-        content: [{
-          type: 'text' as const,
-          text: JSON.stringify({
-            count: events.length,
-            events: events.map((e) => ({
-              id: e.id,
-              title: e.title,
-              date: e.date,
-              endDate: e.endDate,
-              type: e.type,
-              description: e.description,
-              tags: e.tags,
-              free: e.free,
-              url: e.url,
-            })),
-          }, null, 2),
-        }],
-      };
-    }
-  );
-
-  // Get AWS learning paths
-  server.tool(
-    'get_learning_paths',
-    'Get recommended AWS learning paths with associated services and difficulty levels.',
-    {
-      level: z.enum(['beginner', 'intermediate', 'advanced']).optional().describe('Filter by difficulty level'),
-      service: z.string().optional().describe('Find paths containing a specific AWS service'),
-    },
-    async ({ level, service }) => {
-      let paths = [...LEARNING_PATHS];
-
-      if (level) {
-        paths = paths.filter((p) => p.level === level);
-      }
-      if (service) {
-        paths = paths.filter((p) => p.services.some((s) => s.includes(service.toLowerCase())));
+      if (announcements.length === 0) {
+        return { content: [{ type: 'text' as const, text: 'Unable to fetch What\'s New feed. Try again in a moment.' }] };
       }
 
       return {
         content: [{
           type: 'text' as const,
-          text: JSON.stringify({ paths }, null, 2),
+          text: `AWS What's New - ${announcements.length} latest announcements:\n\n${announcements.map((a, i) => `${i + 1}. ${a.title}\n   ${new Date(a.pubDate).toLocaleDateString()}\n   ${a.contentSnippet}\n   ${a.link}`).join('\n\n')}`,
         }],
       };
     }
   );
 
-  // Create a learning task from an AWS article or event
-  server.tool(
-    'create_learning_task',
-    'Create a task in FocusFlow from an AWS article, event, or learning goal. Automatically tagged with AWS and relevant service tags.',
-    {
-      title: z.string().describe('Learning task title'),
-      description: z.string().optional().describe('What to learn or do'),
-      source_url: z.string().optional().describe('URL of the article/event'),
-      tags: z.array(z.string()).default([]).describe('Tags (AWS services, topics)'),
-      estimatedMinutes: z.number().default(30).describe('Estimated time in minutes'),
-      dueDate: z.string().optional().describe('Due date (YYYY-MM-DD)'),
-      priority: z.enum(['critical', 'high', 'medium', 'low']).default('medium').describe('Priority level'),
-    },
-    async ({ title, description, source_url, tags, estimatedMinutes, dueDate, priority }) => {
-      const fullDescription = [
-        description,
-        source_url ? `\nSource: ${source_url}` : '',
-      ].filter(Boolean).join('');
-
-      const task = store.createTask({
-        title,
-        description: fullDescription,
-        category: 'Learning',
-        tags: ['aws', ...tags],
-        estimatedMinutes,
-        dueDate,
-        priority,
-      });
-
-      return {
-        content: [{
-          type: 'text' as const,
-          text: `Learning task created:\n- Title: "${task.title}"\n- ID: ${task.id}\n- Category: Learning\n- Tags: ${['aws', ...tags].join(', ')}\n- Est: ${estimatedMinutes} min`,
-        }],
-      };
-    }
-  );
-
-  // Get today's AWS digest
+  // Get all AWS news across multiple feeds
   server.tool(
     'get_aws_daily_digest',
-    'Get a curated daily digest of the most important AWS news, events, and learning recommendations. Perfect for a morning briefing.',
+    'Fetch a real-time daily digest combining latest posts from AWS Blog, What\'s New, and Machine Learning feeds. Perfect for a morning briefing.',
     {},
     async () => {
-      const today = new Date().toISOString().split('T')[0];
-      const recentArticles = AWS_ARTICLES.slice(0, 3);
-      const upcomingEvents = AWS_EVENTS
-        .filter((e) => new Date(e.date) >= new Date())
-        .slice(0, 3);
+      const [blog, whatsNew, ml] = await Promise.all([
+        fetchFeed(AWS_FEEDS.blog),
+        fetchFeed(AWS_FEEDS.whats_new),
+        fetchFeed(AWS_FEEDS.machine_learning),
+      ]);
 
+      const today = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+      // Get existing learning tasks
       const existingTasks = store.listTasks(undefined, { category: 'Learning' });
       const awsTasks = existingTasks.filter((t) => t.tags.includes('aws'));
       const pendingLearning = awsTasks.filter((t) => t.status !== 'completed');
 
       const digest = {
         date: today,
-        greeting: `Here's your AWS daily digest for ${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}`,
-        topArticles: recentArticles.map((a) => ({
+        fetchedAt: new Date().toISOString(),
+        topBlogPosts: blog.slice(0, 3).map((a) => ({
           title: a.title,
-          category: a.category,
-          summary: a.summary,
-          source: a.source,
+          date: new Date(a.pubDate).toLocaleDateString(),
+          summary: a.contentSnippet,
+          url: a.link,
         })),
-        upcomingEvents: upcomingEvents.map((e) => ({
-          title: e.title,
-          date: e.date,
-          type: e.type,
-          free: e.free,
+        whatsNew: whatsNew.slice(0, 5).map((a) => ({
+          title: a.title,
+          date: new Date(a.pubDate).toLocaleDateString(),
+          url: a.link,
+        })),
+        mlUpdates: ml.slice(0, 3).map((a) => ({
+          title: a.title,
+          date: new Date(a.pubDate).toLocaleDateString(),
+          summary: a.contentSnippet,
+          url: a.link,
         })),
         learningStatus: {
           pendingTasks: pendingLearning.length,
           topics: [...new Set(pendingLearning.flatMap((t) => t.tags.filter((tag) => tag !== 'aws')))],
         },
-        recommendation: pendingLearning.length === 0
-          ? 'You have no AWS learning tasks. Consider creating one from today\'s articles!'
-          : `You have ${pendingLearning.length} pending AWS learning task(s). Keep the momentum going!`,
       };
 
-      return {
-        content: [{
-          type: 'text' as const,
-          text: JSON.stringify(digest, null, 2),
-        }],
-      };
+      return { content: [{ type: 'text' as const, text: JSON.stringify(digest, null, 2) }] };
     }
   );
 
-  // Search AWS content
+  // Search across all feeds
   server.tool(
     'search_aws_content',
-    'Search across all AWS articles, events, and learning paths by keyword.',
+    'Search for specific topics across all AWS RSS feeds in real-time. Useful for finding articles about specific services or features.',
     {
-      query: z.string().describe('Search query (e.g., "bedrock agents", "serverless", "cost optimization")'),
+      query: z.string().describe('Search query (e.g., "bedrock", "lambda layers", "cost optimization")'),
+      limit: z.number().default(10).describe('Max results'),
     },
-    async ({ query }) => {
+    async ({ query, limit }) => {
       const lowerQuery = query.toLowerCase();
 
-      const matchingArticles = AWS_ARTICLES.filter(
-        (a) => a.title.toLowerCase().includes(lowerQuery) ||
-               a.summary.toLowerCase().includes(lowerQuery) ||
-               a.tags.some((t) => t.includes(lowerQuery))
-      );
+      // Fetch from multiple feeds in parallel
+      const [blog, whatsNew, ml, compute, devops] = await Promise.all([
+        fetchFeed(AWS_FEEDS.blog),
+        fetchFeed(AWS_FEEDS.whats_new),
+        fetchFeed(AWS_FEEDS.machine_learning),
+        fetchFeed(AWS_FEEDS.compute),
+        fetchFeed(AWS_FEEDS.devops),
+      ]);
 
-      const matchingEvents = AWS_EVENTS.filter(
-        (e) => e.title.toLowerCase().includes(lowerQuery) ||
-               e.description.toLowerCase().includes(lowerQuery) ||
-               e.tags.some((t) => t.includes(lowerQuery))
-      );
+      const allItems = [
+        ...blog.map((i) => ({ ...i, source: 'blog' })),
+        ...whatsNew.map((i) => ({ ...i, source: 'whats_new' })),
+        ...ml.map((i) => ({ ...i, source: 'machine_learning' })),
+        ...compute.map((i) => ({ ...i, source: 'compute' })),
+        ...devops.map((i) => ({ ...i, source: 'devops' })),
+      ];
 
-      const matchingPaths = LEARNING_PATHS.filter(
-        (p) => p.name.toLowerCase().includes(lowerQuery) ||
-               p.services.some((s) => s.includes(lowerQuery))
-      );
+      const matches = allItems.filter(
+        (item) =>
+          item.title.toLowerCase().includes(lowerQuery) ||
+          (item.contentSnippet || '').toLowerCase().includes(lowerQuery) ||
+          (item.categories || []).some((c) => c.toLowerCase().includes(lowerQuery))
+      ).slice(0, limit);
 
-      const totalResults = matchingArticles.length + matchingEvents.length + matchingPaths.length;
+      if (matches.length === 0) {
+        return { content: [{ type: 'text' as const, text: `No results found for "${query}" in recent AWS feeds. Try a broader search term.` }] };
+      }
 
       return {
         content: [{
           type: 'text' as const,
           text: JSON.stringify({
             query,
-            totalResults,
-            articles: matchingArticles.map((a) => ({ title: a.title, category: a.category, date: a.date, source: a.source })),
-            events: matchingEvents.map((e) => ({ title: e.title, date: e.date, type: e.type, free: e.free })),
-            learningPaths: matchingPaths.map((p) => ({ name: p.name, level: p.level, services: p.services })),
+            results: matches.length,
+            items: matches.map((m) => ({
+              title: m.title,
+              source: m.source,
+              date: new Date(m.pubDate).toLocaleDateString(),
+              summary: m.contentSnippet,
+              url: m.link,
+            })),
           }, null, 2),
+        }],
+      };
+    }
+  );
+
+  // Get AWS events
+  server.tool(
+    'get_aws_events',
+    'Fetch upcoming AWS events from the official events feed.',
+    {
+      limit: z.number().default(10).describe('Max events to return'),
+    },
+    async ({ limit }) => {
+      try {
+        const items = await fetchFeed(AWS_EVENTS_URL);
+        const events = items.slice(0, limit);
+
+        if (events.length === 0) {
+          return { content: [{ type: 'text' as const, text: 'No events found in the feed. Check https://aws.amazon.com/events/ directly.' }] };
+        }
+
+        return {
+          content: [{
+            type: 'text' as const,
+            text: JSON.stringify({
+              count: events.length,
+              events: events.map((e) => ({
+                title: e.title,
+                date: new Date(e.pubDate).toLocaleDateString(),
+                description: e.contentSnippet,
+                url: e.link,
+                categories: e.categories,
+              })),
+            }, null, 2),
+          }],
+        };
+      } catch {
+        return { content: [{ type: 'text' as const, text: 'Unable to fetch events feed. Visit https://aws.amazon.com/events/ for the latest.' }] };
+      }
+    }
+  );
+
+  // Get learning paths (curated - these don't change often)
+  server.tool(
+    'get_learning_paths',
+    'Get recommended AWS learning paths with associated services and difficulty levels.',
+    {
+      level: z.enum(['beginner', 'intermediate', 'advanced']).optional().describe('Filter by difficulty'),
+    },
+    async ({ level }) => {
+      const paths = [
+        { id: 'lp-1', name: 'AI/ML on AWS', services: ['Bedrock', 'SageMaker', 'Nova', 'Strands'], level: 'intermediate', url: 'https://aws.amazon.com/training/learn-about/machine-learning/' },
+        { id: 'lp-2', name: 'Serverless Development', services: ['Lambda', 'API Gateway', 'DynamoDB', 'Step Functions'], level: 'beginner', url: 'https://aws.amazon.com/serverless/' },
+        { id: 'lp-3', name: 'Agentic AI & MCP', services: ['Bedrock', 'Strands', 'MCP', 'AgentCore'], level: 'advanced', url: 'https://strandsagents.com/' },
+        { id: 'lp-4', name: 'Cloud Architecture', services: ['VPC', 'ECS', 'RDS', 'CloudFront'], level: 'intermediate', url: 'https://aws.amazon.com/architecture/' },
+        { id: 'lp-5', name: 'DevOps & CI/CD', services: ['CodePipeline', 'CDK', 'CloudFormation', 'Q Developer'], level: 'intermediate', url: 'https://aws.amazon.com/devops/' },
+      ];
+
+      const filtered = level ? paths.filter((p) => p.level === level) : paths;
+      return { content: [{ type: 'text' as const, text: JSON.stringify({ paths: filtered }, null, 2) }] };
+    }
+  );
+
+  // Create learning task from AWS content
+  server.tool(
+    'create_learning_task',
+    'Create a FocusFlow task from an AWS article or learning goal. Automatically tagged with AWS.',
+    {
+      title: z.string().describe('Task title'),
+      description: z.string().optional().describe('Description or source URL'),
+      tags: z.array(z.string()).default([]).describe('Tags'),
+      estimatedMinutes: z.number().default(30).describe('Time estimate'),
+      priority: z.enum(['critical', 'high', 'medium', 'low']).default('medium'),
+    },
+    async ({ title, description, tags, estimatedMinutes, priority }) => {
+      const task = store.createTask({
+        title,
+        description,
+        category: 'Learning',
+        tags: ['aws', ...tags],
+        estimatedMinutes,
+        priority,
+      });
+
+      return {
+        content: [{
+          type: 'text' as const,
+          text: `Learning task created: "${task.title}" (ID: ${task.id}, Tags: ${['aws', ...tags].join(', ')})`,
         }],
       };
     }
