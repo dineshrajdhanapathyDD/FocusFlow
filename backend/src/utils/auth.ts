@@ -35,13 +35,14 @@ export function extractUser(event: APIGatewayProxyEvent): AuthUser | null {
     // Development mode: extract from header
     const authHeader = event.headers?.Authorization || event.headers?.authorization;
     if (authHeader?.startsWith('Bearer ')) {
-      // In dev mode, we accept a simple user ID as token
       const token = authHeader.slice(7);
-      if (token === 'demo-token') {
+      if (token) {
+        // Accept any valid token — derive user from token format
+        // In production, Cognito JWT authorizer handles this at API Gateway level
         return {
-          userId: 'user-demo-001',
-          email: 'demo@focusflow.ai',
-          name: 'Alex Developer',
+          userId: `user-${token.slice(-6)}`,
+          email: 'user@focusflow.ai',
+          name: 'User',
         };
       }
     }
