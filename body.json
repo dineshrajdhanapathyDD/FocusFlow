@@ -1,0 +1,1 @@
+{"schemaVersion":"messages-v1","system":[{"text":"You are helpful."}],"messages":[{"role":"user","content":[{"text":"Say hi"}]}],"inferenceConfig":{"max_new_tokens":20}}

@@ -1,0 +1,1 @@
+{"output":{"message":{"content":[{"text":"Hi there! How are you doing today? If you have any questions or need assistance with something,"}],"role":"assistant"}},"stopReason":"max_tokens","usage":{"inputTokens":6,"outputTokens":20,"totalTokens":26,"cacheReadInputTokenCount":0,"cacheWriteInputTokenCount":0}}
