@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useGamification } from './GamificationContext';
 
 export function XPRewardPopup() {
-  const { recentReward, clearReward } = useGamification();
+  const { recentReward } = useGamification();
 
   return (
     <AnimatePresence>

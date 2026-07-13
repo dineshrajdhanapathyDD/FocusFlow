@@ -10,7 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon as CheckCircleSolid } from '@heroicons/react/24/solid';
 import { Badge, ProgressBar } from '@/components/ui';
-import { cn, formatDuration, getRelativeTime, getPriorityColor } from '@/lib/utils';
+import { cn, formatDuration, getRelativeTime } from '@/lib/utils';
 import type { Task } from '@/types';
 
 interface TaskCardProps {

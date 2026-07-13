@@ -19,7 +19,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Avatar, Badge } from '@/components/ui';
+import { Avatar } from '@/components/ui';
 import { NotificationPanel } from '@/components/notifications';
 import { cn } from '@/lib/utils';
 import { mockNotifications } from '@/services/mockData';

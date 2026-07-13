@@ -71,11 +71,6 @@ export function GamificationProvider({ children }: { children: ReactNode }) {
 
   const [recentReward, setRecentReward] = useState<{ xp: number; reason: string } | null>(null);
 
-  const persist = (newState: GamificationState) => {
-    setState(newState);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
-  };
-
   const addXP = useCallback((amount: number, reason: string) => {
     setState((prev) => {
       const newState = { ...prev, xp: prev.xp + amount };

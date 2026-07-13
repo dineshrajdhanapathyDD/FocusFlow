@@ -7,7 +7,7 @@ import {
   ClipboardIcon,
   CheckIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Spinner } from '@/components/ui';
+import { Button } from '@/components/ui';
 import { AIThinkingIndicator } from '@/components/animated';
 import { SuggestedPrompts } from './SuggestedPrompts';
 import { StreamingText } from './StreamingText';

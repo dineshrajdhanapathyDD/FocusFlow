@@ -4,7 +4,6 @@ import { AgenticChat } from '@/components/ai/AgenticChat';
 import { Card } from '@/components/ui';
 import type { AgentMessage, AgentType } from '@/types';
 import { generateId } from '@/lib/utils';
-import { agentService } from '@/services/api';
 
 const mockResponses: Record<AgentType, string[]> = {
   productivity_coach: [

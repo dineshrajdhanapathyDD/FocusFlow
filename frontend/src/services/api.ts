@@ -13,7 +13,6 @@ import type {
   User,
   AppNotification,
   PlannerSettings,
-  ApiResponse,
 } from '@/types';
 
 class ApiClient {

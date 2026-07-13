@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { AnimatedRing } from '@/components/animated';
 import { useGamification } from './GamificationContext';
 import { getLevelTitle } from './types';

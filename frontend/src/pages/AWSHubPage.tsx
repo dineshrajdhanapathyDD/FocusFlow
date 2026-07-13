@@ -7,9 +7,8 @@ import {
   SparklesIcon,
   ArrowTopRightOnSquareIcon,
   BookOpenIcon,
-  MagnifyingGlassIcon,
 } from '@heroicons/react/24/outline';
-import { Card, CardHeader, CardTitle, Badge, Button, Spinner } from '@/components/ui';
+import { Card, Badge, Button, Spinner } from '@/components/ui';
 import { agentService, type AgenticResponse } from '@/services/api';
 import { cn } from '@/lib/utils';
 

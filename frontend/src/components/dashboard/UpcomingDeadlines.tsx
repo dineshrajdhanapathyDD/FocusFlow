@@ -1,4 +1,4 @@
-import { CalendarIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { CalendarIcon } from '@heroicons/react/24/outline';
 import { Card, CardHeader, CardTitle, Badge } from '@/components/ui';
 import { formatDate, getRelativeTime } from '@/lib/utils';
 import type { Task } from '@/types';

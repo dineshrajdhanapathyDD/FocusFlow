@@ -1,7 +1,6 @@
 import { SparklesIcon, LightBulbIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { Card, CardHeader, CardTitle } from '@/components/ui';
 import type { AIInsight } from '@/types';
-import { cn } from '@/lib/utils';
 
 interface RecentInsightsProps {
   insights: AIInsight[];

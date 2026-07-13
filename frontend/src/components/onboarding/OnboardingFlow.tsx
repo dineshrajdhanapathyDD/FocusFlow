@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SparklesIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { SparklesIcon } from '@heroicons/react/24/outline';
 import { AnimatedButton } from '@/components/animated';
 import { cn } from '@/lib/utils';
 

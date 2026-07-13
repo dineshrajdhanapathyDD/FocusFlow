@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  CalendarDaysIcon,
   SparklesIcon,
-  ClockIcon,
   PlusIcon,
 } from '@heroicons/react/24/outline';
-import { Button, Card, CardHeader, CardTitle, Badge } from '@/components/ui';
+import { Button, Card } from '@/components/ui';
 import type { TimeBlock, DailyPlan } from '@/types';
 import { cn } from '@/lib/utils';
 

@@ -123,7 +123,7 @@ export default function SettingsPage() {
           <Select
             label="Energy Pattern"
             value={energyPattern}
-            onChange={(e) => setEnergyPattern(e.target.value)}
+            onChange={(e) => setEnergyPattern(e.target.value as 'morning' | 'afternoon' | 'evening' | 'night')}
             options={ENERGY_PATTERNS.map((p) => ({ value: p.value, label: p.label }))}
           />
           <Button onClick={handleSavePreferences}>Save Preferences</Button>

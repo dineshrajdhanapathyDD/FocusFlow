@@ -1,14 +1,16 @@
+import { type HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 
-interface SkeletonProps {
+interface SkeletonProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-export function Skeleton({ className }: SkeletonProps) {
+export function Skeleton({ className, ...props }: SkeletonProps) {
   return (
     <div
       className={cn('animate-pulse rounded-lg bg-surface-200 dark:bg-surface-700', className)}
       aria-hidden="true"
+      {...props}
     />
   );
 }
