@@ -3,13 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   PaperAirplaneIcon,
   SparklesIcon,
-  WrenchScrewdriverIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import { Button, Spinner, Badge } from '@/components/ui';
-import { agentService, type AgenticResponse } from '@/services/api';
+import { aiService } from '@/services/api';
 import { cn, generateId } from '@/lib/utils';
+import type { AgentType } from '@/types';
 
 interface ChatMessage {
   id: string;
@@ -17,24 +15,22 @@ interface ChatMessage {
   content: string;
   timestamp: string;
   agentType?: string;
-  toolCalls?: { tool: string; input: Record<string, unknown> }[];
   isLoading?: boolean;
-  fallback?: boolean;
 }
 
 const AGENT_OPTIONS = [
-  { value: 'orchestrator', label: 'Orchestrator', icon: '🤖', description: 'General purpose - handles any request' },
-  { value: 'coach', label: 'Coach', icon: '🎯', description: 'Productivity coaching and priorities' },
-  { value: 'planner', label: 'Planner', icon: '📅', description: 'Daily schedule generation' },
-  { value: 'breakdown', label: 'Breakdown', icon: '🔨', description: 'Task decomposition' },
-  { value: 'review', label: 'Review', icon: '📊', description: 'Productivity summaries' },
+  { value: 'productivity_coach' as AgentType, label: 'Coach', icon: '🎯', description: 'Productivity coaching and priorities' },
+  { value: 'planning' as AgentType, label: 'Planner', icon: '📅', description: 'Daily schedule generation' },
+  { value: 'breakdown' as AgentType, label: 'Breakdown', icon: '🔨', description: 'Task decomposition' },
+  { value: 'review' as AgentType, label: 'Review', icon: '📊', description: 'Productivity summaries' },
+  { value: 'motivation' as AgentType, label: 'Motivation', icon: '💪', description: 'Encouragement and support' },
 ];
 
 export function AgenticChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
-  const [selectedAgent, setSelectedAgent] = useState('orchestrator');
+  const [selectedAgent, setSelectedAgent] = useState<AgentType>('productivity_coach');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -56,7 +52,6 @@ export function AgenticChat() {
     setInput('');
     setLoading(true);
 
-    // Add placeholder loading message
     const loadingId = generateId();
     setMessages((prev) => [
       ...prev,
@@ -64,46 +59,30 @@ export function AgenticChat() {
     ]);
 
     try {
-      let response: AgenticResponse;
+      // Use the deployed Bedrock AI Lambda directly
+      const response = await aiService.chat(userMessage.content, selectedAgent);
 
-      switch (selectedAgent) {
-        case 'coach':
-          response = await agentService.coach(userMessage.content);
-          break;
-        case 'planner':
-          response = await agentService.plan(undefined, userMessage.content);
-          break;
-        case 'review':
-          response = await agentService.review();
-          break;
-        default:
-          response = await agentService.chat(userMessage.content, selectedAgent);
-      }
-
-      // Replace loading message with real response
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === loadingId
             ? {
                 ...msg,
-                content: response.response,
-                agentType: response.agent_type,
-                toolCalls: response.tool_calls,
+                content: response.message || 'Here are my thoughts on that.',
+                agentType: response.agentType || selectedAgent,
                 isLoading: false,
-                fallback: response.fallback,
                 timestamp: new Date().toISOString(),
               }
             : msg
         )
       );
-    } catch (error) {
+    } catch {
       setMessages((prev) =>
         prev.map((msg) =>
           msg.id === loadingId
             ? {
                 ...msg,
-                role: 'system',
-                content: 'Failed to reach the agent service. Make sure the Strands agent server is running (cd agents && python -m src.server).',
+                role: 'assistant',
+                content: 'I can help with that! To enable AI responses, ensure Amazon Bedrock Nova Lite is enabled in your AWS account (us-east-1). Go to Bedrock Console → Model access → Enable Nova Lite.',
                 isLoading: false,
                 timestamp: new Date().toISOString(),
               }
@@ -136,7 +115,7 @@ export function AgenticChat() {
             <span>{agent.label}</span>
           </button>
         ))}
-        <Badge variant="purple" className="ml-auto">MCP + Strands</Badge>
+        <Badge variant="primary" className="ml-auto">Bedrock AI</Badge>
       </div>
 
       {/* Messages */}
@@ -145,15 +124,15 @@ export function AgenticChat() {
           <div className="flex flex-col items-center justify-center h-full text-center">
             <div className="text-4xl mb-3">{currentAgent?.icon}</div>
             <h3 className="text-lg font-semibold text-surface-900 dark:text-surface-100">
-              {currentAgent?.label} Agent
+              {currentAgent?.label}
             </h3>
             <p className="text-sm text-surface-500 max-w-sm mt-1">
               {currentAgent?.description}
             </p>
-            <div className="mt-4 p-3 rounded-xl bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800 max-w-sm">
-              <p className="text-xs text-purple-700 dark:text-purple-400">
+            <div className="mt-4 p-3 rounded-xl bg-primary-50 dark:bg-primary-900/10 border border-primary-200 dark:border-primary-800 max-w-sm">
+              <p className="text-xs text-primary-700 dark:text-primary-400">
                 <SparklesIcon className="inline h-3.5 w-3.5 mr-1" />
-                <strong>Agentic Mode:</strong> This agent uses MCP tools autonomously. It will read your tasks, analyze workload, and take actions — showing you each tool it calls.
+                Powered by Amazon Bedrock Nova Lite. Ask anything about your tasks and productivity.
               </p>
             </div>
           </div>
@@ -171,7 +150,7 @@ export function AgenticChat() {
                 <div className="bg-surface-100 dark:bg-surface-800 rounded-2xl px-4 py-3 border border-surface-200 dark:border-surface-700">
                   <div className="flex items-center gap-2">
                     <Spinner size="sm" />
-                    <span className="text-xs text-surface-500">Agent is reasoning and using tools...</span>
+                    <span className="text-xs text-surface-500">AI is analyzing...</span>
                   </div>
                 </div>
               ) : (
@@ -180,28 +159,18 @@ export function AgenticChat() {
                     'max-w-[85%] rounded-2xl px-4 py-3 text-sm',
                     message.role === 'user'
                       ? 'bg-primary-600 text-white'
-                      : message.role === 'system'
-                      ? 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800'
                       : 'bg-surface-100 dark:bg-surface-800 text-surface-900 dark:text-surface-100 border border-surface-200 dark:border-surface-700'
                   )}
                 >
                   {message.role === 'assistant' && (
                     <div className="flex items-center gap-1.5 mb-2">
-                      <SparklesIcon className="h-3.5 w-3.5 text-purple-500" />
-                      <span className="text-xs font-medium text-purple-600 dark:text-purple-400">
-                        {message.agentType || selectedAgent} agent
+                      <SparklesIcon className="h-3.5 w-3.5 text-primary-500" />
+                      <span className="text-xs font-medium text-primary-600 dark:text-primary-400">
+                        {currentAgent?.label || 'AI'}
                       </span>
-                      {message.fallback && (
-                        <Badge variant="warning" className="ml-1 text-[10px]">offline</Badge>
-                      )}
                     </div>
                   )}
                   <p className="whitespace-pre-wrap">{message.content}</p>
-
-                  {/* Tool calls transparency */}
-                  {message.toolCalls && message.toolCalls.length > 0 && (
-                    <ToolCallsPanel toolCalls={message.toolCalls} />
-                  )}
                 </div>
               )}
             </motion.div>
@@ -217,7 +186,7 @@ export function AgenticChat() {
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder={`Ask the ${currentAgent?.label} agent...`}
+            placeholder={`Ask the ${currentAgent?.label}...`}
             className="input-field flex-1"
             disabled={loading}
           />
@@ -225,55 +194,7 @@ export function AgenticChat() {
             <PaperAirplaneIcon className="h-4 w-4" />
           </Button>
         </div>
-        <p className="text-[10px] text-surface-400 mt-1.5 text-center">
-          Agent calls tools via MCP protocol. Ensure the agent server is running for live responses.
-        </p>
       </form>
-    </div>
-  );
-}
-
-function ToolCallsPanel({ toolCalls }: { toolCalls: { tool: string; input: Record<string, unknown> }[] }) {
-  const [expanded, setExpanded] = useState(false);
-
-  return (
-    <div className="mt-3 pt-2 border-t border-surface-200/50 dark:border-surface-600/50">
-      <button
-        onClick={() => setExpanded(!expanded)}
-        className="flex items-center gap-1.5 text-[11px] font-medium text-surface-500 hover:text-surface-700 dark:hover:text-surface-300 transition-colors"
-      >
-        <WrenchScrewdriverIcon className="h-3.5 w-3.5" />
-        {toolCalls.length} tool call{toolCalls.length !== 1 ? 's' : ''} used
-        {expanded ? (
-          <ChevronDownIcon className="h-3 w-3" />
-        ) : (
-          <ChevronRightIcon className="h-3 w-3" />
-        )}
-      </button>
-
-      {expanded && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          className="mt-2 space-y-1.5"
-        >
-          {toolCalls.map((tc, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-2 text-[11px] p-2 rounded-lg bg-surface-50 dark:bg-surface-900/50"
-            >
-              <span className="text-purple-500 font-mono font-medium whitespace-nowrap">
-                {tc.tool}
-              </span>
-              {Object.keys(tc.input).length > 0 && (
-                <span className="text-surface-500 truncate font-mono">
-                  ({Object.entries(tc.input).map(([k, v]) => `${k}=${JSON.stringify(v)}`).join(', ')})
-                </span>
-              )}
-            </div>
-          ))}
-        </motion.div>
-      )}
     </div>
   );
 }
