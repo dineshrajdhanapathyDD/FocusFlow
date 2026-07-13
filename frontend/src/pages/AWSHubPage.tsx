@@ -10,11 +10,17 @@ import {
   ArrowPathIcon,
 } from '@heroicons/react/24/outline';
 import { Card, Badge, Button, Spinner } from '@/components/ui';
-import { agentService, type AgenticResponse } from '@/services/api';
+import { aiService } from '@/services/api';
 import { fetchAWSFeed, fetchMultipleFeeds, searchAWSFeeds, type AWSFeedItem, type FeedSource } from '@/services/awsFeed';
 import { cn } from '@/lib/utils';
 
 type TabType = 'feed' | 'events' | 'learning' | 'agent';
+
+interface AIResponse {
+  response: string;
+  tool_calls?: { tool: string; input: Record<string, unknown> }[];
+  fallback?: boolean;
+}
 
 const sourceLabels: Record<string, string> = {
   blog: 'AWS Blog',
@@ -48,7 +54,7 @@ const LEARNING_PATHS = [
 
 export default function AWSHubPage() {
   const [activeTab, setActiveTab] = useState<TabType>('feed');
-  const [agentResponse, setAgentResponse] = useState<AgenticResponse | null>(null);
+  const [agentResponse, setAgentResponse] = useState<AIResponse | null>(null);
   const [agentLoading, setAgentLoading] = useState(false);
   const [skillInput, setSkillInput] = useState('');
 
@@ -63,12 +69,19 @@ export default function AWSHubPage() {
     setAgentLoading(true);
     setActiveTab('agent');
     try {
-      const res = await agentService.awsLearn(message);
-      setAgentResponse(res);
-    } catch {
+      // Use the deployed Bedrock AI chat endpoint directly
+      const res = await aiService.chat(message, 'productivity_coach');
       setAgentResponse({
-        response: `I'll help you with: "${message}"\n\nThe AI agent service is currently offline. Here's what you can do:\n\n1. Check the Live Feed tab for the latest articles on this topic\n2. Use the search to find relevant AWS content\n3. Start the agent server locally: cd agents && python -m src.server`,
-        agent_type: 'aws_learning', tool_calls: [], success: true, fallback: true,
+        response: res.message || 'Here are my thoughts on that topic.',
+        tool_calls: [],
+        fallback: false,
+      });
+    } catch {
+      // Fallback: provide a helpful response without the backend
+      setAgentResponse({
+        response: `About "${message}":\n\nI recommend checking the Live Feed tab for the latest articles on this topic. You can also search for specific AWS services using the search bar.\n\nFor deeper analysis, ensure Amazon Bedrock Nova Lite model access is enabled in your AWS account (us-east-1).`,
+        tool_calls: [],
+        fallback: true,
       });
     }
     setAgentLoading(false);
@@ -369,7 +382,7 @@ function LearningPanel({ skillInput, setSkillInput, onGeneratePlan, loading }: {
 }
 
 function AgentPanel({ response, loading, onAsk }: {
-  response: AgenticResponse | null; loading: boolean; onAsk: (msg: string) => void;
+  response: AIResponse | null; loading: boolean; onAsk: (msg: string) => void;
 }) {
   const [input, setInput] = useState('');
 
@@ -416,9 +429,9 @@ function AgentPanel({ response, loading, onAsk }: {
         <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
           <Card padding="md">
             {response.fallback && (
-              <div className="mb-3 p-2.5 rounded-lg bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800">
-                <p className="text-xs text-yellow-700 dark:text-yellow-400">
-                  Running in offline mode. Start agent server for full AI analysis.
+              <div className="mb-3 p-2.5 rounded-lg bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800">
+                <p className="text-xs text-blue-700 dark:text-blue-400">
+                  Tip: Enable Amazon Bedrock Nova Lite in your AWS account for AI-powered responses.
                 </p>
               </div>
             )}
