@@ -1,14 +1,22 @@
 # AI FocusFlow - Personal AI Productivity Planner
 
-A modern, production-ready AI-powered productivity web application that helps users organize work using Amazon Bedrock AI. It intelligently prioritizes tasks, generates daily schedules, breaks down complex work, estimates effort, and provides productivity insights.
+A modern, production-ready AI-powered productivity web application that helps users organize work using Amazon Bedrock AI. Features intelligent task prioritization, AI-generated daily schedules, real-time AWS news feeds, gamification, and an agentic MCP + Strands integration.
+
+![FocusFlow.drawio.png](https://images.tomarkdown.dev/uploaded/5tzcpq4433csulnh.png)
+
+
+**Live on AWS** | [Architecture Diagram](docs/architecture-diagram.drawio) | [Full Article](docs/article.md)
 
 ## Features
 
 ### Core
-- **Smart Task Manager** - Create, edit, delete tasks with priorities, categories, tags, due dates, drag-and-drop ordering, search, and filters
+- **Smart Task Manager** - Create, edit, delete tasks with priorities, categories, tags, due dates, search, and filters
 - **AI Task Prioritizer** - Analyzes tasks using urgency, importance, effort, and dependencies to recommend execution order
 - **AI Daily Planner** - Generates optimized schedules based on available hours, deadlines, energy levels
 - **AI Task Breakdown** - Converts large tasks into actionable subtasks with milestones
+- **AWS Hub** - Real-time news from 8 AWS blog RSS feeds, What's New announcements, learning paths
+- **Gamification** - XP points, streaks, achievements, daily challenges, level progression
+- **Email OTP Auth** - Passwordless login via Amazon Cognito custom auth + SES
 - **Productivity Dashboard** - Visual metrics, weekly charts, AI productivity score, deadlines
 - **AI Insights** - Daily summaries, burnout warnings, focus recommendations
 - **Notifications** - Deadline reminders, overdue alerts, achievement badges
@@ -95,6 +103,14 @@ A modern, production-ready AI-powered productivity web application that helps us
 - AWS CLI configured with credentials
 - AWS SAM CLI
 - Amazon Bedrock access (Nova Lite model enabled)
+
+
+Link to App & Repo
+
+- **Live App:** FocusFlow (https://main.djlzywreto6am.amplifyapp.com/)
+- **GitHub Repo:** [github.com/dineshrajdhanapathyDD/FocusFlow](https://github.com/dineshrajdhanapathyDD/FocusFlow)
+- **Region:** us-east-1
+
 
 ### Local Development
 

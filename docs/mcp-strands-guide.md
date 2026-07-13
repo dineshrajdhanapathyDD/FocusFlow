@@ -2,78 +2,81 @@
 
 ## Overview
 
-AI FocusFlow uses two complementary technologies for agentic AI:
+AI FocusFlow uses two complementary technologies for advanced agentic AI:
 
-1. **MCP Server** (TypeScript) - Exposes productivity tools via the Model Context Protocol
-2. **Strands Agents** (Python) - Autonomous AI agents that use those tools in an agentic loop
+1. **MCP Server** (TypeScript) — Exposes 21 productivity tools via the Model Context Protocol
+2. **Strands Agents** (Python) — 6 autonomous AI agents that use those tools in an agentic loop
+
+## Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│  Frontend  (React)                                          │
-│  ┌─────────────────────────────────────────────────────┐   │
-│  │  Agentic Chat UI                                    │   │
-│  │  - Agent selector (Coach/Planner/Breakdown/Review)  │   │
-│  │  - Tool call transparency panel                     │   │
-│  │  - Standard ↔ Agentic mode toggle                   │   │
-│  └──────────────────────────┬──────────────────────────┘   │
-└─────────────────────────────┼───────────────────────────────┘
-                              │ POST /api/agent/*
-┌─────────────────────────────┼───────────────────────────────┐
-│  Backend  (Node.js Lambda)  │                               │
-│  ┌──────────────────────────▼──────────────────────────┐   │
-│  │  agents.ts handler (proxy)                          │   │
-│  └──────────────────────────┬──────────────────────────┘   │
-└─────────────────────────────┼───────────────────────────────┘
-                              │ HTTP to :5000
-┌─────────────────────────────┼───────────────────────────────┐
-│  Strands Agents  (Python FastAPI)                           │
-│  ┌──────────────────────────▼──────────────────────────┐   │
-│  │  Agent (Coach/Planner/Breakdown/Review/Orchestrator) │   │
-│  │  ┌──────────────────────────────────────────────┐   │   │
-│  │  │  Agentic Loop:                               │   │   │
-│  │  │  1. Reason about request                     │   │   │
-│  │  │  2. Decide which MCP tool to call            │   │   │
-│  │  │  3. Call tool via MCP client                  │   │   │
-│  │  │  4. Observe result                           │   │   │
-│  │  │  5. Repeat or respond                        │   │   │
-│  │  └──────────────────────┬───────────────────────┘   │   │
-│  └─────────────────────────┼───────────────────────────┘   │
-└────────────────────────────┼────────────────────────────────┘
-                             │ stdio (MCP protocol)
-┌────────────────────────────┼────────────────────────────────┐
-│  MCP Server  (TypeScript)  │                                │
-│  ┌─────────────────────────▼───────────────────────────┐   │
-│  │  12 Tools:                                          │   │
-│  │  Tasks: list, get, create, update, complete, delete │   │
-│  │  Planner: get_plan, generate_plan, add_block        │   │
-│  │  Analytics: metrics, workload, overdue              │   │
-│  │  Insights: summary, focus_recommendations           │   │
-│  └──────────────────────────┬──────────────────────────┘   │
-│                             │                               │
-│                    In-memory Store / DynamoDB                │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────┐
+│  Frontend  (React)                                               │
+│  ┌────────────────────────────────────────────────────────────┐ │
+│  │  AI Assistant (Agentic Mode) / AWS Hub AI Guide            │ │
+│  └──────────────────────────┬─────────────────────────────────┘ │
+└─────────────────────────────┼────────────────────────────────────┘
+                              │ POST /api/ai/chat (Bedrock)
+                              │ POST /api/agent/* (Strands - optional)
+┌─────────────────────────────┼────────────────────────────────────┐
+│  Backend (Lambda / FastAPI)  │                                    │
+│  ┌───────────────────────────▼────────────────────────────────┐ │
+│  │  AI Lambda (Bedrock) — Always available                    │ │
+│  │  Agent Proxy → Strands service — When running locally      │ │
+│  └───────────────────────────┬────────────────────────────────┘ │
+└──────────────────────────────┼───────────────────────────────────┘
+                               │ HTTP to :5000 (local)
+┌──────────────────────────────┼───────────────────────────────────┐
+│  Strands Agents (Python FastAPI)                                  │
+│  ┌───────────────────────────▼────────────────────────────────┐ │
+│  │  Agent (Coach / Planner / Breakdown / Review / AWS / Orch) │ │
+│  │  ┌─────────────────────────────────────────────────────┐   │ │
+│  │  │  Agentic Loop:                                      │   │ │
+│  │  │  1. Reason about request (Bedrock)                  │   │ │
+│  │  │  2. Decide which MCP tool to call                   │   │ │
+│  │  │  3. Execute tool via MCP client                     │   │ │
+│  │  │  4. Observe result                                  │   │ │
+│  │  │  5. Repeat or respond                               │   │ │
+│  │  └──────────────────────────┬──────────────────────────┘   │ │
+│  └─────────────────────────────┼──────────────────────────────┘ │
+└────────────────────────────────┼────────────────────────────────┘
+                                 │ stdio (MCP protocol)
+┌────────────────────────────────┼────────────────────────────────┐
+│  MCP Server (TypeScript)       │                                 │
+│  ┌─────────────────────────────▼──────────────────────────────┐ │
+│  │  21 Tools:                                                 │ │
+│  │                                                            │ │
+│  │  TASKS: list · get · create · update · complete · delete   │ │
+│  │         batch_create                                       │ │
+│  │  PLANNER: get_plan · generate_plan · add_block             │ │
+│  │  ANALYTICS: metrics · workload · overdue                   │ │
+│  │  INSIGHTS: summary · focus_recommendations                 │ │
+│  │  AWS NEWS: articles · whats_new · events · daily_digest    │ │
+│  │            search · learning_paths · create_learning_task   │ │
+│  └────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 ## Running Locally
 
-You need three processes:
+You need three terminals:
 
 ```bash
 # Terminal 1: Frontend
-cd frontend && npm run dev
+cd frontend && npm run dev         # http://localhost:3000
 
-# Terminal 2: Backend API (proxies to agents)
-cd backend && npm run dev
+# Terminal 2: Backend API
+cd backend && npm run dev          # http://localhost:4000
 
-# Terminal 3: Strands Agents + MCP Server
-cd agents && python -m src.server
+# Terminal 3: Strands Agents (starts MCP server automatically)
+cd agents && pip install -e . && python -m src.server  # http://localhost:5000
 ```
 
-The Strands agent server automatically starts the MCP server as a subprocess via stdio.
+The Strands agent server automatically spawns the MCP server as a subprocess via stdio.
 
-## Using the MCP Server in Kiro/VS Code
+## Using the MCP Server in Kiro
 
-Add this to your `.kiro/settings/mcp.json`:
+Add to your `.kiro/settings/mcp.json`:
 
 ```json
 {
@@ -88,109 +91,109 @@ Add this to your `.kiro/settings/mcp.json`:
 }
 ```
 
-This lets you use FocusFlow tools directly in Kiro chat:
-- "List my tasks" → calls `list_tasks`
-- "What should I focus on?" → calls `get_focus_recommendations`
-- "Create a task to review PRs" → calls `create_task`
-- "Plan my day" → calls `generate_daily_plan`
+Then use FocusFlow tools directly in Kiro chat:
+- "List my tasks" → `list_tasks`
+- "What should I focus on?" → `get_focus_recommendations`
+- "What's new on AWS?" → `get_aws_whats_new`
+- "Create a task to learn Bedrock" → `create_learning_task`
 
-## Available MCP Tools
+## All MCP Tools (21)
 
+### Tasks (7 tools)
 | Tool | Description |
 |------|-------------|
-| `list_tasks` | List tasks with optional status/priority/category filters |
-| `get_task` | Get full details of a task by ID |
+| `list_tasks` | List tasks with status/priority/category filters |
+| `get_task` | Get full details by ID |
 | `create_task` | Create a new task |
-| `update_task` | Update task fields (status, priority, progress) |
-| `complete_task` | Mark a task as completed |
-| `delete_task` | Permanently delete a task |
+| `update_task` | Update fields (status, priority, progress) |
+| `complete_task` | Mark as completed |
+| `delete_task` | Permanently delete |
 | `batch_create_tasks` | Create multiple tasks at once |
+
+### Planner (3 tools)
+| Tool | Description |
+|------|-------------|
 | `get_daily_plan` | Get schedule for a date |
 | `generate_daily_plan` | AI-generate optimized schedule |
-| `add_time_block` | Add meeting/event to plan |
+| `add_time_block` | Add meeting/event/break |
+
+### Analytics (3 tools)
+| Tool | Description |
+|------|-------------|
 | `get_productivity_metrics` | Completion rates, categories, deadlines |
-| `assess_workload` | Current workload level assessment |
+| `assess_workload` | Current workload level + recommendation |
 | `get_overdue_tasks` | List overdue tasks |
+
+### Insights (2 tools)
+| Tool | Description |
+|------|-------------|
 | `get_productivity_summary` | Full summary with suggestions |
 | `get_focus_recommendations` | What to work on next |
 
-## Strands Agent Details
+### AWS News (6 tools — Real-time RSS)
+| Tool | Description |
+|------|-------------|
+| `get_aws_articles` | Fetch from 8 AWS blog RSS feeds |
+| `get_aws_whats_new` | Latest service announcements |
+| `get_aws_events` | Upcoming events |
+| `get_aws_daily_digest` | Combined morning briefing |
+| `search_aws_content` | Search across all feeds |
+| `get_learning_paths` | Curated skill paths |
+| `create_learning_task` | Turn articles into tasks |
 
-Each agent uses:
-- **Model**: Amazon Bedrock Nova Lite (fast, cost-effective)
-- **Tools**: All 15 MCP tools via `strands.tools.mcp.MCPClient`
-- **Transport**: stdio (MCP server runs as subprocess)
-- **Loop**: Autonomous - agent decides when to call tools and when to respond
+## Strands Agents (6)
 
-### Agent System Prompts
+| Agent | Endpoint | What it does |
+|-------|----------|-------------|
+| **Orchestrator** | `/agent/chat` | General purpose — routes any request |
+| **Coach** | `/agent/coach` | Workload analysis, priority coaching |
+| **Planner** | `/agent/plan` | Daily schedule generation |
+| **Breakdown** | `/agent/breakdown` | Complex task decomposition |
+| **Review** | `/agent/review` | End-of-day productivity summary |
+| **AWS Learning** | `/agent/aws/*` | AWS news curation, learning plans |
 
-The agents are designed with specific personalities:
+Each agent:
+- Uses **Amazon Bedrock Nova Lite** as the reasoning model
+- Has access to **all 21 MCP tools** via `strands.tools.mcp.MCPClient`
+- Operates in an **autonomous agentic loop** (reason → act → observe → repeat)
+- Returns tool call transparency (which tools were used)
 
-- **Orchestrator**: Can handle any request. Routes intelligently.
-- **Coach**: Focuses on priorities, workload balance, actionable advice.
-- **Planner**: Creates time-blocked schedules with energy awareness.
-- **Breakdown**: Decomposes large tasks using verb-led subtask names.
-- **Review**: Data-driven summaries with patterns and scores.
-
-## API Endpoints (via Backend Proxy)
+## API Endpoints
 
 | Method | Path | Description |
 |--------|------|-------------|
-| POST | `/api/agent/chat` | Chat with any agent (specify `agent_type`) |
-| POST | `/api/agent/coach` | Get coaching advice |
-| POST | `/api/agent/plan` | Generate daily plan |
-| POST | `/api/agent/breakdown` | Break down a task |
-| POST | `/api/agent/review` | Get productivity review |
-| GET | `/api/agent/tools` | List available MCP tools |
+| POST | `/api/agent/chat` | Chat with any agent |
+| POST | `/api/agent/coach` | Coaching advice |
+| POST | `/api/agent/plan` | Generate plan |
+| POST | `/api/agent/breakdown` | Break down task |
+| POST | `/api/agent/review` | Productivity review |
+| POST | `/api/agent/aws/digest` | AWS daily digest |
+| POST | `/api/agent/aws/learn` | Learn about AWS topic |
+| POST | `/api/agent/aws/events` | Event recommendations |
+| POST | `/api/agent/aws/skill-plan` | Generate learning plan |
+| GET | `/api/agent/tools` | List MCP tools |
 
-### Example Request
+## Extending
 
-```bash
-curl -X POST http://localhost:4000/api/agent/chat \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer demo-token" \
-  -d '{
-    "message": "I have 2 hours before lunch. What should I work on?",
-    "agent_type": "coach"
-  }'
-```
+### Add a new MCP tool
 
-### Example Response
-
-```json
-{
-  "response": "Based on your current tasks, I recommend focusing on...",
-  "agent_type": "coach",
-  "tool_calls": [
-    {"tool": "list_tasks", "input": {"status": "todo"}},
-    {"tool": "assess_workload", "input": {}},
-    {"tool": "get_focus_recommendations", "input": {"availableMinutes": 120}}
-  ],
-  "success": true
-}
-```
-
-## Extending with New Tools
-
-### Adding an MCP Tool
-
-Edit `mcp-server/src/tools/` and register with the McpServer:
+In `mcp-server/src/tools/`, register with the server:
 
 ```typescript
 server.tool(
-  'my_new_tool',
-  'Description of what the tool does',
-  { param: z.string().describe('Parameter description') },
+  'my_tool_name',
+  'Description for the AI to understand when to use this tool',
+  { param: z.string().describe('What this param is for') },
   async ({ param }) => {
-    // Implementation
+    // Your logic here
     return { content: [{ type: 'text', text: 'Result' }] };
   }
 );
 ```
 
-### Adding a Strands Agent
+### Add a new Strands agent
 
-Create a new file in `agents/src/agents/`:
+Create `agents/src/agents/my_agent.py`:
 
 ```python
 from strands import Agent
@@ -198,12 +201,21 @@ from strands.models.bedrock import BedrockModel
 from ..config import BEDROCK_MODEL_ID, AWS_REGION
 
 def create_my_agent(mcp_tools: list) -> Agent:
-    model = BedrockModel(model_id=BEDROCK_MODEL_ID, region_name=AWS_REGION)
     return Agent(
-        model=model,
+        model=BedrockModel(model_id=BEDROCK_MODEL_ID, region_name=AWS_REGION),
         tools=mcp_tools,
-        system_prompt="Your agent's system prompt here",
+        system_prompt="You are... (define role, capabilities, response format)",
     )
 ```
 
-The agent automatically gets access to all MCP tools and can call them autonomously.
+The agent automatically gets all 21 MCP tools and can call them autonomously.
+
+---
+
+## Related Documentation
+
+- [Architecture Overview](./architecture.md)
+- [Amazon Bedrock Setup](./bedrock-setup.md)
+- [Deployment Guide](./deployment-guide.md)
+- [Project Article](./article.md)
+- [Architecture Diagram](./architecture-diagram.drawio)

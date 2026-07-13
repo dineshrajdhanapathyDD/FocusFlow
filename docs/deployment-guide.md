@@ -2,131 +2,172 @@
 
 ## Prerequisites
 
-1. **AWS Account** with Free Tier eligibility
-2. **AWS CLI** installed and configured (`aws configure`)
-3. **AWS SAM CLI** installed ([Install guide](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html))
-4. **Node.js 20+** installed
-5. **Amazon Bedrock** - Enable the Nova Lite model in your AWS region
+- **AWS Account** (Free Tier eligible)
+- **AWS CLI** configured (`aws configure`)
+- **AWS CDK CLI** installed (`npm install -g aws-cdk`)
+- **Node.js 20+**
+- **Amazon Bedrock** — Nova Lite model enabled in us-east-1
+
+## Current Deployment
+
+| Resource | Value |
+|----------|-------|
+| API Gateway | `https://utp50r9qdd.execute-api.us-east-1.amazonaws.com/dev/` |
+| Cognito User Pool | `us-east-1_X800aMS5o` |
+| Cognito Client ID | `6spocspt7tkca199buhbi4rjmh` |
+| Region | `us-east-1` |
+| Stack Name | `FocusFlowStack` |
 
 ## Step 1: Enable Bedrock Model Access
 
-1. Open the [Amazon Bedrock Console](https://console.aws.amazon.com/bedrock/)
-2. Go to **Model access** in the left sidebar
-3. Click **Manage model access**
-4. Enable **Amazon Nova Lite** (amazon.nova-lite-v1:0)
-5. Wait for access to be granted (usually instant)
+1. Open [Amazon Bedrock Console](https://console.aws.amazon.com/bedrock/) (us-east-1)
+2. Go to **Model access** → **Manage model access**
+3. Enable **Amazon Nova Lite** → Request access
+4. Wait for approval (usually instant)
 
-## Step 2: Deploy Backend Infrastructure
+## Step 2: Build Backend
 
 ```bash
-# Build the backend
 cd backend
 npm install
-npm run build
-
-# Deploy with SAM
-cd ../infrastructure
-sam build
-sam deploy --guided
+npm run build   # Compiles TypeScript to dist/
 ```
 
-During guided deployment, you'll be prompted for:
-- **Stack Name**: `focusflow-dev`
-- **Region**: `us-east-1` (or your preferred region)
-- **Environment**: `dev`
-- **UserPoolId**: Leave empty (creates new Cognito pool)
+## Step 3: Deploy Infrastructure (CDK)
 
-Note the outputs:
-- `ApiUrl` - Your API Gateway endpoint
-- `UserPoolId` - Cognito User Pool ID
-- `UserPoolClientId` - Cognito Client ID
+```bash
+cd infrastructure/cdk
+npm install
+npx tsc          # Compile CDK stack
 
-## Step 3: Deploy Frontend
+# First time: bootstrap CDK in your account
+cdk bootstrap aws://YOUR_ACCOUNT_ID/us-east-1
 
-### Option A: AWS Amplify Hosting (Recommended)
+# Deploy
+cdk deploy --require-approval never
+```
 
-1. Push code to a Git repository (GitHub, CodeCommit, etc.)
+**Outputs after deploy:**
+- `ApiUrl` — Your API Gateway endpoint
+- `UserPoolId` — Cognito User Pool ID
+- `UserPoolClientId` — Cognito Client ID
+
+## Step 4: Deploy Frontend (Amplify)
+
+### Option A: Auto-deploy via GitHub (Recommended)
+
+1. Push code to GitHub
 2. Open [AWS Amplify Console](https://console.aws.amazon.com/amplify/)
-3. Click **New app** > **Host web app**
-4. Connect your repository and select the branch
-5. Amplify auto-detects `amplify.yml` build settings
-6. Add environment variables:
-   - `VITE_API_URL` = API Gateway URL from Step 2
-   - `VITE_COGNITO_USER_POOL_ID` = from Step 2
-   - `VITE_COGNITO_CLIENT_ID` = from Step 2
-7. Deploy
+3. **New app** → **Host web app** → Connect GitHub repo
+4. Amplify detects `amplify.yml` with `appRoot: frontend`
+5. Add environment variables:
 
-### Option B: Manual Build + S3
+| Key | Value |
+|-----|-------|
+| `VITE_API_URL` | `https://YOUR_API_ID.execute-api.us-east-1.amazonaws.com/dev/api` |
+| `VITE_COGNITO_USER_POOL_ID` | From CDK output |
+| `VITE_COGNITO_CLIENT_ID` | From CDK output |
+| `VITE_COGNITO_REGION` | `us-east-1` |
+
+6. Deploy — Amplify builds and hosts automatically
+
+### Option B: Manual Build
 
 ```bash
 cd frontend
-echo "VITE_API_URL=https://your-api-id.execute-api.us-east-1.amazonaws.com/dev" > .env
 npm install
+
+# Create .env with your values
+echo "VITE_API_URL=https://YOUR_API.execute-api.us-east-1.amazonaws.com/dev/api" > .env
+
 npm run build
-
-# Upload to S3
-aws s3 sync dist/ s3://your-bucket-name --delete
+# Upload dist/ to S3 + CloudFront, or any static host
 ```
 
-## Step 4: Configure CORS (if needed)
+## Step 5: Configure SES (for OTP emails)
 
-The SAM template already configures CORS for `*`. For production, restrict the `AllowOrigin` in `template.yaml` to your Amplify domain:
+The OTP system works in **dev mode** without SES (code is auto-filled). For real email delivery:
 
-```yaml
-AllowOrigin: "'https://your-app.amplifyapp.com'"
-```
+1. Go to **SES Console** → **Verified identities**
+2. Verify your sender email or domain
+3. **Request production access** (to send to any email)
+4. Set `SES_PRODUCTION=true` in the CreateAuthChallenge Lambda environment
 
-Then redeploy: `sam deploy`
-
-## Step 5: Create First User
-
-With Cognito deployed:
-1. Open the app in your browser
-2. Click **Sign Up** and create an account
-3. Check your email for the verification code
-4. Verify and sign in
-
-Or use the demo mode (works without Cognito):
-- Email: `demo@focusflow.ai`
-- Password: `demo123`
+Until SES is in production mode, the OTP code is returned to the frontend and auto-filled.
 
 ## Updating the Application
 
-### Backend changes
+### Backend changes:
 ```bash
 cd backend && npm run build
-cd ../infrastructure && sam deploy
+cd ../infrastructure/cdk && cdk deploy --require-approval never
 ```
 
-### Frontend changes
-If using Amplify, push to your repository. Amplify auto-deploys.
+### Frontend changes:
+Push to GitHub → Amplify auto-deploys.
 
-If using S3: `cd frontend && npm run build && aws s3 sync dist/ s3://bucket`
+### Force Lambda update (if CDK caches):
+```bash
+# Find latest asset zip
+aws s3 ls s3://cdk-hnb659fds-assets-ACCOUNT-us-east-1/ | Select-String ".zip" | Sort-Object | Select-Object -Last 1
+
+# Update all functions
+$key = "LATEST_KEY.zip"
+foreach ($fn in @("focusflow-auth-dev","focusflow-tasks-dev","focusflow-ai-dev","focusflow-planner-dev","focusflow-analytics-dev","focusflow-notifications-dev")) {
+  aws lambda update-function-code --function-name $fn --region us-east-1 --s3-bucket cdk-hnb659fds-assets-ACCOUNT-us-east-1 --s3-key $key
+}
+```
+
+## Stack Resources Created
+
+| Resource | Name | Type |
+|----------|------|------|
+| API Gateway | focusflow-api-dev | REST API |
+| Lambda x6 | focusflow-{auth,tasks,ai,planner,analytics,notifications}-dev | Node.js 20 ARM64 |
+| Lambda x4 | focusflow-cognito-{pre-signup,define-auth,create-auth,verify-auth} | Cognito triggers |
+| DynamoDB x4 | FocusFlow-{Tasks,Plans,Insights,Notifications}-dev | PAY_PER_REQUEST |
+| Cognito | focusflow-users-dev | User Pool + Client |
+| CloudWatch | /aws/lambda/focusflow-* | Log groups (14-day retention) |
 
 ## Monitoring
 
-- **CloudWatch Logs**: Each Lambda has a log group at `/aws/lambda/focusflow-*`
-- **Structured logging**: All logs are JSON-formatted for easy querying
-- **X-Ray tracing**: Enabled on API Gateway
+- **Lambda logs:** CloudWatch → `/aws/lambda/focusflow-*-dev`
+- **All logs are structured JSON** — easy to query with CloudWatch Insights
+- **API Gateway:** Metrics available in CloudWatch
 
-## Troubleshooting
+Example CloudWatch Insights query:
+```
+fields @timestamp, @message
+| filter @message like /ERROR/
+| sort @timestamp desc
+| limit 20
+```
 
-| Issue | Solution |
-|-------|----------|
-| CORS errors | Check AllowOrigin in template.yaml matches your domain |
-| 401 Unauthorized | Verify Cognito token is valid and not expired |
-| Bedrock timeout | Increase Lambda timeout (currently 60s for AI function) |
-| DynamoDB errors | Check IAM policies allow the operation on the table |
-| Cold starts | First request may be slow; consider Provisioned Concurrency for prod |
+## Destroy (Cleanup)
+
+```bash
+cd infrastructure/cdk
+cdk destroy
+```
+
+> Note: DynamoDB tables with `RETAIN` policy won't be deleted. Remove manually if needed.
 
 ## Production Checklist
 
-- [ ] Set `Environment` parameter to `prod`
-- [ ] Restrict CORS to specific domain
-- [ ] Enable WAF on API Gateway
+- [ ] Enable Bedrock Nova Lite model access
+- [ ] Request SES production access for real OTP emails
+- [ ] Set `SES_PRODUCTION=true` on CreateAuthChallenge Lambda
+- [ ] Restrict CORS to your Amplify domain
+- [ ] Add custom domain with ACM certificate
+- [ ] Enable Cognito MFA (optional)
 - [ ] Set up CloudWatch Alarms for errors
-- [ ] Configure DynamoDB backups
-- [ ] Review IAM policies for least privilege
-- [ ] Enable Cognito MFA
-- [ ] Set up custom domain with ACM certificate
-- [ ] Configure Amplify branch protection
+- [ ] Review Lambda concurrency limits
+
+---
+
+## Related Documentation
+
+- [Architecture Overview](./architecture.md)
+- [Amazon Bedrock Setup](./bedrock-setup.md)
+- [MCP + Strands Guide](./mcp-strands-guide.md)
+- [Project Article](./article.md)
