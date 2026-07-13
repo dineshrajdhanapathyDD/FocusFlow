@@ -1,0 +1,30 @@
+# SAM CLI configuration for AI FocusFlow
+
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "focusflow-dev"
+resolve_s3 = true
+s3_prefix = "focusflow"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
+parameter_overrides = "Environment=dev"
+confirm_changeset = true
+
+[staging.deploy.parameters]
+stack_name = "focusflow-staging"
+resolve_s3 = true
+s3_prefix = "focusflow-staging"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
+parameter_overrides = "Environment=staging"
+confirm_changeset = true
+
+[prod.deploy.parameters]
+stack_name = "focusflow-prod"
+resolve_s3 = true
+s3_prefix = "focusflow-prod"
+region = "us-east-1"
+capabilities = "CAPABILITY_IAM CAPABILITY_AUTO_EXPAND"
+parameter_overrides = "Environment=prod"
+confirm_changeset = true

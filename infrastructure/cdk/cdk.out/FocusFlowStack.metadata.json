@@ -1,0 +1,2247 @@
+{
+  "/FocusFlowStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "TasksTable88911DC5"
+      }
+    }
+  ],
+  "/FocusFlowStack/PlansTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "PlansTableD3E3A972"
+      }
+    }
+  ],
+  "/FocusFlowStack/InsightsTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "InsightsTableBE354BC6"
+      }
+    }
+  ],
+  "/FocusFlowStack/NotificationsTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "NotificationsTable76DCFC6C"
+      }
+    }
+  ],
+  "/FocusFlowStack/ApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:251:9)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:252:9)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/UserPoolClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:253:9)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksTableName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksTableName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:254:9)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/Region": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Region"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:255:9)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksTable88911DC5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:49:28)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/PlansTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlansTableD3E3A972"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:62:28)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/InsightsTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "InsightsTableBE354BC6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:69:31)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/NotificationsTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NotificationsTable76DCFC6C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:77:36)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:86:26)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/UserPoolClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClient2F5918F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolClient2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:104:32)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AuthFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthFunctionA1CD5E0F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:127:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:127:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksFunction1A043ECB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:138:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AIFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AIFunction3DD9AA07"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:150:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/PlannerFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlannerFunction7813D2C8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:167:27)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AnalyticsFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AnalyticsFunctionFF8C31E8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:180:29)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/NotificationsFunction/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NotificationsFunctionE347FB50"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:192:33)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiA6D5887A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Account": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiAccount04880DD6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Endpoint": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiEndpoint96CF1AD1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/AuthFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthFunctionServiceRole87A7A68C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:127:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AuthFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AuthFunctionLogRetention5816710E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:127:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:127:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksFunctionServiceRole7A67749F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:138:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksFunctionLogRetentionE755D97D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:138:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AIFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AIFunctionServiceRole7032A1D8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:150:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AIFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AIFunctionLogRetention4F5F2C03"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:150:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/PlannerFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlannerFunctionServiceRoleC9E6D47A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:167:27)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/PlannerFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlannerFunctionLogRetention59F367F5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:167:27)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AnalyticsFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AnalyticsFunctionServiceRole4C6FF659"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:180:29)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/AnalyticsFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AnalyticsFunctionLogRetention3886D16E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:180:29)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/NotificationsFunction/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NotificationsFunctionServiceRole879987A8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:192:33)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/NotificationsFunction/LogRetention/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NotificationsFunctionLogRetention5220B3A3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:192:33)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/CloudWatchRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiCloudWatchRole3CDA74CD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Deployment/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiDeployment3F4BD8331029a67984f6e4e9cf52e4cdfc20e88b"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/DeploymentStage.dev/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiDeploymentStagedev796413DA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/TasksFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksFunctionServiceRoleDefaultPolicy240AA715"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/AIFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AIFunctionServiceRoleDefaultPolicyF30F3250"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/PlannerFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PlannerFunctionServiceRoleDefaultPolicyEF66685F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/AnalyticsFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AnalyticsFunctionServiceRoleDefaultPolicy0F4B1A8C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/NotificationsFunction/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "NotificationsFunctionServiceRoleDefaultPolicy4C6646C3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiOPTIONSD2379DC1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new RestApi2 in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:205:21)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiA7C31AC1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:215:39)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiOPTIONS82ECB9FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...RootResource.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:215:39)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthFBFF3D7B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:215:58)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasks318E51E7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:223:39)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiF13449B6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:231:36)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplanner43DB4B5A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:238:41)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/analytics/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapianalytics175B0695"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:243:17)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsDE2BB9FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:245:39)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthOPTIONS49DCED15"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:215:58)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthlogin0E07241A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:216:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthregisterA17A0733"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:217:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofile85B77261"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:218:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksOPTIONSF25783CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:223:39)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapitasksB235FF6D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:224:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapitasks489F88F9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:224:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksGET17176FCB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:224:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.tasks": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapitasks74B7A141"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:225:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.tasks": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapitasks8DCE710C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:225:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksPOST523DAD7D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:225:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidA746D34C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:226:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiOPTIONSB4455413"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:231:36)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaichat5230DA6D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:232:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiprioritizeF263C24F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:233:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaibreakdownE44ABE0D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:234:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiplan9F477A15"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:235:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiinsights7A85C4FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:236:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerOPTIONSCB1058D8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:238:41)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.planner": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiplanner265FED88"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:239:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.planner": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiplanner4B8EED20"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:239:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerPOSTF46C4471"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:239:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.planner": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapiplannerEF3C058A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:240:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.planner": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapiplanner581D2FA6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:240:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerPUTC1DFFD43"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:240:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerdateCB9C5D56"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:241:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/analytics/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapianalyticsOPTIONS19E11D9A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:243:17)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.analytics": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapianalyticsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapianalyticsD149A209"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:243:42)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.analytics": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapianalyticsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapianalyticsF4BA6060"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:243:42)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapianalyticsGET71BF707B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:243:42)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsOPTIONSB3C12813"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:245:39)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.notifications": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapinotifications5D840468"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:246:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.notifications": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapinotifications2BA50740"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:246:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsGET6452FE78"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:246:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsreadall745A1E91"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:247:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsid0F509693"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:248:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthloginOPTIONSCB5902F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:216:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.login": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthloginPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiauthloginFA8D70E4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:216:43)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.login": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthloginPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiauthlogin54376177"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:216:43)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthloginPOST8D1B4BBF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:216:43)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthregisterOPTIONS892F3629"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:217:22)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.register": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthregisterPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiauthregisterBA1C12C7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:217:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.register": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthregisterPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiauthregister3EE8C099"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:217:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthregisterPOSTFD5FDED9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:217:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofileOPTIONSFE58F037"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:218:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.auth.profile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofileGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiauthprofileBF705DFF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:219:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.auth.profile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofileGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiauthprofileA34824A8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:219:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofileGET2712CED5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:219:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.auth.profile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofilePUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapiauthprofileF57CD7C9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:220:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.auth.profile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofilePUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapiauthprofile392BF443"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:220:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiauthprofilePUT82D6C510"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:220:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidOPTIONS2C63E018"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:226:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks.{id}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapitasksid405752FE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:227:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks.{id}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapitasksid0A6909CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:227:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidGET4AE735FC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:227:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.tasks.{id}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapitasksid5003997E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:228:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.tasks.{id}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapitasksidEA18D3CF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:228:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidPUTB5A24987"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:228:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/ApiPermission.FocusFlowStackFocusFlowApi074A9030.DELETE..api.tasks.{id}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidDELETEApiPermissionFocusFlowStackFocusFlowApi074A9030DELETEapitasksid570B30C8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:229:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.DELETE..api.tasks.{id}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidDELETEApiPermissionTestFocusFlowStackFocusFlowApi074A9030DELETEapitasksid6521605A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:229:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapitasksidDELETEA0B5A4FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:229:24)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaichatOPTIONSC141E9FA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:232:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.chat": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaichatPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaichat97BFE128"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:232:40)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.chat": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaichatPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaichatDE4F5B37"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:232:40)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaichatPOSTF4DD3E4F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:232:40)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiprioritizeOPTIONSADFE70F3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:233:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.prioritize": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiprioritizePOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaiprioritizeE5626E6A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:233:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.prioritize": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiprioritizePOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaiprioritizeF8539BE7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:233:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiprioritizePOSTCA5D9A58"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:233:46)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaibreakdownOPTIONSB4E1DEFA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:234:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.breakdown": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaibreakdownPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaibreakdownF46D0C03"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:234:45)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.breakdown": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaibreakdownPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaibreakdown59D8D0D1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:234:45)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaibreakdownPOST3E246DA2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:234:45)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiplanOPTIONS0519C0B2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:235:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.plan": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiplanPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaiplan977990D9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:235:40)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.plan": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiplanPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaiplan68190979"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:235:40)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiplanPOSTDF7BD360"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:235:40)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiinsightsOPTIONS0744FC51"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:236:20)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.ai.insights": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiinsightsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiaiinsightsF0C87693"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:236:44)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.ai.insights": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiinsightsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiaiinsights4E69173C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:236:44)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiaiinsightsGETD5E1E4A6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:236:44)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerdateOPTIONSB1B04C25"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:241:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.planner.{date}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerdateGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiplannerdate5B898085"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:241:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.planner.{date}": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerdateGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiplannerdate93B26444"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:241:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapiplannerdateGETEE2D1A17"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:241:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsreadallOPTIONSE55FBAE5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:247:23)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.read-all": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsreadallPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapinotificationsreadallB30FA2C6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:247:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.read-all": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsreadallPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapinotificationsreadall5A8ABE71"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:247:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsreadallPUTED840B59"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:247:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsidOPTIONS01446335"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:248:47)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsidread83644CDB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:249:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/OPTIONS/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsidreadOPTIONS570A526B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addResource in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:249:25)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)"
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.{id}.read": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsidreadPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapinotificationsidreadF1DA3ADE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:249:45)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.{id}.read": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsidreadPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapinotificationsidreadB8346B6B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:249:45)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FocusFlowApiapinotificationsidreadPUTF21CB121"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addMethod in aws-cdk-lib...",
+        "new FocusFlowStack (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\stack.js:249:45)",
+        "<anonymous> (D:\\github work\\productivity apps\\infrastructure\\cdk\\bin\\app.js:40:1)",
+        "...node internals..."
+      ]
+    }
+  ]
+}

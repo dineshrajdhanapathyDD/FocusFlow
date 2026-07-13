@@ -1,0 +1,979 @@
+{
+  "version": "39.0.0",
+  "artifacts": {
+    "FocusFlowStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "FocusFlowStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "FocusFlowStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://466742534146/us-east-1",
+      "properties": {
+        "templateFile": "FocusFlowStack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::466742534146:role/cdk-hnb659fds-deploy-role-466742534146-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::466742534146:role/cdk-hnb659fds-cfn-exec-role-466742534146-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-466742534146-us-east-1/637ad79a94cae0cc796240106b15597623109723f8d772d85df31be289786d71.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "FocusFlowStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::466742534146:role/cdk-hnb659fds-lookup-role-466742534146-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "FocusFlowStack.assets"
+      ],
+      "metadata": {
+        "/FocusFlowStack/TasksTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "TasksTable88911DC5"
+            }
+          }
+        ],
+        "/FocusFlowStack/TasksTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TasksTable88911DC5"
+          }
+        ],
+        "/FocusFlowStack/PlansTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "PlansTableD3E3A972"
+            }
+          }
+        ],
+        "/FocusFlowStack/PlansTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PlansTableD3E3A972"
+          }
+        ],
+        "/FocusFlowStack/InsightsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "InsightsTableBE354BC6"
+            }
+          }
+        ],
+        "/FocusFlowStack/InsightsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "InsightsTableBE354BC6"
+          }
+        ],
+        "/FocusFlowStack/NotificationsTable": [
+          {
+            "type": "aws:cdk:hasPhysicalName",
+            "data": {
+              "Ref": "NotificationsTable76DCFC6C"
+            }
+          }
+        ],
+        "/FocusFlowStack/NotificationsTable/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NotificationsTable76DCFC6C"
+          }
+        ],
+        "/FocusFlowStack/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPool6BA7E5F2"
+          }
+        ],
+        "/FocusFlowStack/UserPoolClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolClient2F5918F7"
+          }
+        ],
+        "/FocusFlowStack/AuthFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthFunctionServiceRole87A7A68C"
+          }
+        ],
+        "/FocusFlowStack/AuthFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthFunctionA1CD5E0F"
+          }
+        ],
+        "/FocusFlowStack/AuthFunction/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AuthFunctionLogRetention5816710E"
+          }
+        ],
+        "/FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+          }
+        ],
+        "/FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB"
+          }
+        ],
+        "/FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A"
+          }
+        ],
+        "/FocusFlowStack/TasksFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TasksFunctionServiceRole7A67749F"
+          }
+        ],
+        "/FocusFlowStack/TasksFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TasksFunctionServiceRoleDefaultPolicy240AA715"
+          }
+        ],
+        "/FocusFlowStack/TasksFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TasksFunction1A043ECB"
+          }
+        ],
+        "/FocusFlowStack/TasksFunction/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TasksFunctionLogRetentionE755D97D"
+          }
+        ],
+        "/FocusFlowStack/AIFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIFunctionServiceRole7032A1D8"
+          }
+        ],
+        "/FocusFlowStack/AIFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIFunctionServiceRoleDefaultPolicyF30F3250"
+          }
+        ],
+        "/FocusFlowStack/AIFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIFunction3DD9AA07"
+          }
+        ],
+        "/FocusFlowStack/AIFunction/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AIFunctionLogRetention4F5F2C03"
+          }
+        ],
+        "/FocusFlowStack/PlannerFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PlannerFunctionServiceRoleC9E6D47A"
+          }
+        ],
+        "/FocusFlowStack/PlannerFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PlannerFunctionServiceRoleDefaultPolicyEF66685F"
+          }
+        ],
+        "/FocusFlowStack/PlannerFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PlannerFunction7813D2C8"
+          }
+        ],
+        "/FocusFlowStack/PlannerFunction/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PlannerFunctionLogRetention59F367F5"
+          }
+        ],
+        "/FocusFlowStack/AnalyticsFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsFunctionServiceRole4C6FF659"
+          }
+        ],
+        "/FocusFlowStack/AnalyticsFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsFunctionServiceRoleDefaultPolicy0F4B1A8C"
+          }
+        ],
+        "/FocusFlowStack/AnalyticsFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsFunctionFF8C31E8"
+          }
+        ],
+        "/FocusFlowStack/AnalyticsFunction/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AnalyticsFunctionLogRetention3886D16E"
+          }
+        ],
+        "/FocusFlowStack/NotificationsFunction/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NotificationsFunctionServiceRole879987A8"
+          }
+        ],
+        "/FocusFlowStack/NotificationsFunction/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NotificationsFunctionServiceRoleDefaultPolicy4C6646C3"
+          }
+        ],
+        "/FocusFlowStack/NotificationsFunction/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NotificationsFunctionE347FB50"
+          }
+        ],
+        "/FocusFlowStack/NotificationsFunction/LogRetention/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "NotificationsFunctionLogRetention5220B3A3"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiA6D5887A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/CloudWatchRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiCloudWatchRole3CDA74CD"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Account": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiAccount04880DD6"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Deployment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiDeployment3F4BD8331029a67984f6e4e9cf52e4cdfc20e88b"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/DeploymentStage.dev/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiDeploymentStagedev796413DA"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Endpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiEndpoint96CF1AD1"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiOPTIONSD2379DC1"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiA7C31AC1"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiOPTIONS82ECB9FF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthFBFF3D7B"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthOPTIONS49DCED15"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthlogin0E07241A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthloginOPTIONSCB5902F8"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.login": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthloginPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiauthloginFA8D70E4"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.login": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthloginPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiauthlogin54376177"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthloginPOST8D1B4BBF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthregisterA17A0733"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthregisterOPTIONS892F3629"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.register": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthregisterPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiauthregisterBA1C12C7"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.register": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthregisterPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiauthregister3EE8C099"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthregisterPOSTFD5FDED9"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofile85B77261"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofileOPTIONSFE58F037"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.auth.profile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofileGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiauthprofileBF705DFF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.auth.profile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofileGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiauthprofileA34824A8"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofileGET2712CED5"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.auth.profile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofilePUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapiauthprofileF57CD7C9"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.auth.profile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofilePUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapiauthprofile392BF443"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiauthprofilePUT82D6C510"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasks318E51E7"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksOPTIONSF25783CF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapitasksB235FF6D"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapitasks489F88F9"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksGET17176FCB"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.tasks": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapitasks74B7A141"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.tasks": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapitasks8DCE710C"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksPOST523DAD7D"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidA746D34C"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidOPTIONS2C63E018"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapitasksid405752FE"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapitasksid0A6909CF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidGET4AE735FC"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.tasks.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapitasksid5003997E"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.tasks.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapitasksidEA18D3CF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidPUTB5A24987"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/ApiPermission.FocusFlowStackFocusFlowApi074A9030.DELETE..api.tasks.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidDELETEApiPermissionFocusFlowStackFocusFlowApi074A9030DELETEapitasksid570B30C8"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.DELETE..api.tasks.{id}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidDELETEApiPermissionTestFocusFlowStackFocusFlowApi074A9030DELETEapitasksid6521605A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapitasksidDELETEA0B5A4FF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiF13449B6"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiOPTIONSB4455413"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaichat5230DA6D"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaichatOPTIONSC141E9FA"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.chat": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaichatPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaichat97BFE128"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.chat": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaichatPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaichatDE4F5B37"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaichatPOSTF4DD3E4F"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiprioritizeF263C24F"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiprioritizeOPTIONSADFE70F3"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.prioritize": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiprioritizePOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaiprioritizeE5626E6A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.prioritize": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiprioritizePOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaiprioritizeF8539BE7"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiprioritizePOSTCA5D9A58"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaibreakdownE44ABE0D"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaibreakdownOPTIONSB4E1DEFA"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.breakdown": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaibreakdownPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaibreakdownF46D0C03"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.breakdown": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaibreakdownPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaibreakdown59D8D0D1"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaibreakdownPOST3E246DA2"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiplan9F477A15"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiplanOPTIONS0519C0B2"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.plan": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiplanPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaiplan977990D9"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.plan": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiplanPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaiplan68190979"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiplanPOSTDF7BD360"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiinsights7A85C4FF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiinsightsOPTIONS0744FC51"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.ai.insights": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiinsightsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiaiinsightsF0C87693"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.ai.insights": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiinsightsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiaiinsights4E69173C"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiaiinsightsGETD5E1E4A6"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplanner43DB4B5A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerOPTIONSCB1058D8"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.planner": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiplanner265FED88"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.planner": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiplanner4B8EED20"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/POST/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerPOSTF46C4471"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.planner": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapiplannerEF3C058A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.planner": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapiplanner581D2FA6"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerPUTC1DFFD43"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerdateCB9C5D56"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerdateOPTIONSB1B04C25"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.planner.{date}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerdateGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiplannerdate5B898085"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.planner.{date}": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerdateGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiplannerdate93B26444"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapiplannerdateGETEE2D1A17"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/analytics/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapianalytics175B0695"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/analytics/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapianalyticsOPTIONS19E11D9A"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.analytics": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapianalyticsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapianalyticsD149A209"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.analytics": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapianalyticsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapianalyticsF4BA6060"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapianalyticsGET71BF707B"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsDE2BB9FF"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsOPTIONSB3C12813"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.notifications": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapinotifications5D840468"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.notifications": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapinotifications2BA50740"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsGET6452FE78"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsreadall745A1E91"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsreadallOPTIONSE55FBAE5"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.read-all": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsreadallPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapinotificationsreadallB30FA2C6"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.read-all": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsreadallPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapinotificationsreadall5A8ABE71"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsreadallPUTED840B59"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsid0F509693"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsidOPTIONS01446335"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsidread83644CDB"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/OPTIONS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsidreadOPTIONS570A526B"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.{id}.read": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsidreadPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapinotificationsidreadF1DA3ADE"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.{id}.read": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsidreadPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapinotificationsidreadB8346B6B"
+          }
+        ],
+        "/FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "FocusFlowApiapinotificationsidreadPUTF21CB121"
+          }
+        ],
+        "/FocusFlowStack/ApiUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ApiUrl"
+          }
+        ],
+        "/FocusFlowStack/UserPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolId"
+          }
+        ],
+        "/FocusFlowStack/UserPoolClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolClientId"
+          }
+        ],
+        "/FocusFlowStack/TasksTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TasksTableName"
+          }
+        ],
+        "/FocusFlowStack/Region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "Region"
+          }
+        ],
+        "/FocusFlowStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/FocusFlowStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/FocusFlowStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "FocusFlowStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

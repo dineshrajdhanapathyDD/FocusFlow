@@ -1,0 +1,17 @@
+{
+  "name": "focusflow-infra",
+  "version": "1.0.0",
+  "bin": { "focusflow": "bin/app.js" },
+  "scripts": {
+    "build": "tsc",
+    "deploy": "cdk deploy --require-approval never"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "2.176.0",
+    "constructs": "^10.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^20.14.0"
+  }
+}

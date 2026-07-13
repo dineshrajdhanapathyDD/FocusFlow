@@ -1,0 +1,428 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AI FocusFlow - Personal AI Productivity Planner
+
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Timeout: 30
+    MemorySize: 256
+    Environment:
+      Variables:
+        TASKS_TABLE: !Ref TasksTable
+        PLANS_TABLE: !Ref PlansTable
+        INSIGHTS_TABLE: !Ref InsightsTable
+        NOTIFICATIONS_TABLE: !Ref NotificationsTable
+        BEDROCK_MODEL_ID: amazon.nova-lite-v1:0
+        AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1'
+    Architectures:
+      - arm64
+
+  Api:
+    Cors:
+      AllowMethods: "'GET,POST,PUT,DELETE,OPTIONS'"
+      AllowHeaders: "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'"
+      AllowOrigin: "'*'"
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, staging, prod]
+  UserPoolId:
+    Type: String
+    Default: ''
+    Description: Cognito User Pool ID for JWT authorization
+
+Resources:
+  # ===== API Gateway =====
+  FocusFlowApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref Environment
+      TracingEnabled: true
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            UserPoolArn: !If
+              - HasUserPool
+              - !Sub arn:aws:cognito-idp:${AWS::Region}:${AWS::AccountId}:userpool/${UserPoolId}
+              - !GetAtt CognitoUserPool.Arn
+
+  # ===== Lambda Functions =====
+  AuthFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub focusflow-auth-${Environment}
+      Handler: dist/handlers/auth.handler
+      CodeUri: ../backend/
+      Events:
+        Login:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/auth/login
+            Method: POST
+            Auth:
+              Authorizer: NONE
+        Register:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/auth/register
+            Method: POST
+            Auth:
+              Authorizer: NONE
+        Profile:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/auth/profile
+            Method: ANY
+
+  TasksFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub focusflow-tasks-${Environment}
+      Handler: dist/handlers/tasks.handler
+      CodeUri: ../backend/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TasksTable
+      Events:
+        ListTasks:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/tasks
+            Method: GET
+        CreateTask:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/tasks
+            Method: POST
+        GetTask:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/tasks/{id}
+            Method: GET
+        UpdateTask:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/tasks/{id}
+            Method: PUT
+        DeleteTask:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/tasks/{id}
+            Method: DELETE
+
+  AIFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub focusflow-ai-${Environment}
+      Handler: dist/handlers/ai.handler
+      CodeUri: ../backend/
+      Timeout: 60
+      MemorySize: 512
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref TasksTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref InsightsTable
+        - Statement:
+            - Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+              Resource: '*'
+      Events:
+        Chat:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/ai/chat
+            Method: POST
+        Prioritize:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/ai/prioritize
+            Method: POST
+        Breakdown:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/ai/breakdown
+            Method: POST
+        Plan:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/ai/plan
+            Method: POST
+        Insights:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/ai/insights
+            Method: GET
+
+  PlannerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub focusflow-planner-${Environment}
+      Handler: dist/handlers/planner.handler
+      CodeUri: ../backend/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PlansTable
+        - DynamoDBReadPolicy:
+            TableName: !Ref TasksTable
+      Events:
+        GetPlan:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/planner/{date}
+            Method: GET
+        SavePlan:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/planner
+            Method: POST
+        UpdatePlan:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/planner
+            Method: PUT
+
+  AnalyticsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub focusflow-analytics-${Environment}
+      Handler: dist/handlers/analytics.handler
+      CodeUri: ../backend/
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref TasksTable
+      Events:
+        GetMetrics:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/analytics
+            Method: GET
+
+  NotificationsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub focusflow-notifications-${Environment}
+      Handler: dist/handlers/notifications.handler
+      CodeUri: ../backend/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref NotificationsTable
+      Events:
+        List:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/notifications
+            Method: GET
+        MarkRead:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/notifications/{id}/read
+            Method: PUT
+        MarkAllRead:
+          Type: Api
+          Properties:
+            RestApiId: !Ref FocusFlowApi
+            Path: /api/notifications/read-all
+            Method: PUT
+
+  # ===== DynamoDB Tables =====
+  TasksTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub FocusFlow-Tasks-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: status
+          AttributeType: S
+        - AttributeName: dueDate
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: StatusIndex
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: status
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: DueDateIndex
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: dueDate
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      Tags:
+        - Key: Application
+          Value: FocusFlow
+
+  PlansTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub FocusFlow-Plans-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: date
+          KeyType: RANGE
+      Tags:
+        - Key: Application
+          Value: FocusFlow
+
+  InsightsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub FocusFlow-Insights-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: createdAt
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Application
+          Value: FocusFlow
+
+  NotificationsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub FocusFlow-Notifications-${Environment}
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: id
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Application
+          Value: FocusFlow
+
+  # ===== Cognito =====
+  CognitoUserPool:
+    Type: AWS::Cognito::UserPool
+    Condition: CreateUserPool
+    Properties:
+      UserPoolName: !Sub focusflow-users-${Environment}
+      AutoVerifiedAttributes:
+        - email
+      UsernameAttributes:
+        - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+          RequireUppercase: true
+      Schema:
+        - Name: name
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+        - Name: email
+          AttributeDataType: String
+          Mutable: false
+          Required: true
+
+  CognitoUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Condition: CreateUserPool
+    Properties:
+      ClientName: !Sub focusflow-app-${Environment}
+      UserPoolId: !Ref CognitoUserPool
+      GenerateSecret: false
+      ExplicitAuthFlows:
+        - ALLOW_USER_PASSWORD_AUTH
+        - ALLOW_REFRESH_TOKEN_AUTH
+        - ALLOW_USER_SRP_AUTH
+      PreventUserExistenceErrors: ENABLED
+
+  # ===== CloudWatch =====
+  ApiLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/apigateway/focusflow-${Environment}
+      RetentionInDays: 14
+
+Conditions:
+  CreateUserPool: !Equals [!Ref UserPoolId, '']
+  HasUserPool: !Not [!Equals [!Ref UserPoolId, '']]
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway URL
+    Value: !Sub https://${FocusFlowApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}
+
+  UserPoolId:
+    Description: Cognito User Pool ID
+    Value: !If [CreateUserPool, !Ref CognitoUserPool, !Ref UserPoolId]
+
+  UserPoolClientId:
+    Description: Cognito App Client ID
+    Value: !If [CreateUserPool, !Ref CognitoUserPoolClient, 'N/A']
+
+  TasksTableName:
+    Description: Tasks DynamoDB Table
+    Value: !Ref TasksTable
+
+  PlansTableName:
+    Description: Plans DynamoDB Table
+    Value: !Ref PlansTable

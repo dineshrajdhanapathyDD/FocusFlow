@@ -1,0 +1,5068 @@
+{
+ "Resources": {
+  "TasksTable88911DC5": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "id",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "status",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "StatusIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "userId",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "status",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "id",
+      "KeyType": "RANGE"
+     }
+    ],
+    "PointInTimeRecoverySpecification": {
+     "PointInTimeRecoveryEnabled": true
+    },
+    "TableName": "FocusFlow-Tasks-dev"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/TasksTable/Resource"
+   }
+  },
+  "PlansTableD3E3A972": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "date",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "date",
+      "KeyType": "RANGE"
+     }
+    ],
+    "TableName": "FocusFlow-Plans-dev"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PlansTable/Resource"
+   }
+  },
+  "InsightsTableBE354BC6": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "createdAt",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "createdAt",
+      "KeyType": "RANGE"
+     }
+    ],
+    "TableName": "FocusFlow-Insights-dev",
+    "TimeToLiveSpecification": {
+     "AttributeName": "ttl",
+     "Enabled": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/InsightsTable/Resource"
+   }
+  },
+  "NotificationsTable76DCFC6C": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "id",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "id",
+      "KeyType": "RANGE"
+     }
+    ],
+    "TableName": "FocusFlow-Notifications-dev",
+    "TimeToLiveSpecification": {
+     "AttributeName": "ttl",
+     "Enabled": true
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/NotificationsTable/Resource"
+   }
+  },
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_phone_number",
+       "Priority": 1
+      },
+      {
+       "Name": "verified_email",
+       "Priority": 2
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": true
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": true,
+      "Name": "name",
+      "Required": true
+     },
+     {
+      "Mutable": false,
+      "Name": "email",
+      "Required": true
+     }
+    ],
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "focusflow-users-dev",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/UserPool/Resource"
+   }
+  },
+  "UserPoolClient2F5918F7": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "profile",
+     "phone",
+     "email",
+     "openid",
+     "aws.cognito.signin.user.admin"
+    ],
+    "CallbackURLs": [
+     "https://example.com"
+    ],
+    "ClientName": "focusflow-app-dev",
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_USER_SRP_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "PreventUserExistenceErrors": "ENABLED",
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/UserPoolClient/Resource"
+   }
+  },
+  "AuthFunctionServiceRole87A7A68C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AuthFunction/ServiceRole/Resource"
+   }
+  },
+  "AuthFunctionA1CD5E0F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TASKS_TABLE": {
+       "Ref": "TasksTable88911DC5"
+      },
+      "PLANS_TABLE": {
+       "Ref": "PlansTableD3E3A972"
+      },
+      "INSIGHTS_TABLE": {
+       "Ref": "InsightsTableBE354BC6"
+      },
+      "NOTIFICATIONS_TABLE": {
+       "Ref": "NotificationsTable76DCFC6C"
+      },
+      "BEDROCK_MODEL_ID": "amazon.nova-lite-v1:0",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "focusflow-auth-dev",
+    "Handler": "dist/handlers/auth.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "AuthFunctionServiceRole87A7A68C",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 15
+   },
+   "DependsOn": [
+    "AuthFunctionServiceRole87A7A68C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AuthFunction/Resource",
+    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "AuthFunctionLogRetention5816710E": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "AuthFunctionA1CD5E0F"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 14
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AuthFunction/LogRetention/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "logs:PutRetentionPolicy",
+        "logs:DeleteRetentionPolicy"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "Roles": [
+     {
+      "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Handler": "index.handler",
+    "Runtime": "nodejs20.x",
+    "Timeout": 900,
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d.zip"
+    },
+    "Role": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8a/Resource",
+    "aws:asset:path": "asset.2819175352ad1ce0dae768e83fc328fb70fb5f10b4a8ff0ccbcb791f02b0716d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "TasksFunctionServiceRole7A67749F": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/TasksFunction/ServiceRole/Resource"
+   }
+  },
+  "TasksFunctionServiceRoleDefaultPolicy240AA715": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "TasksTable88911DC5",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "TasksTable88911DC5",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "TasksFunctionServiceRoleDefaultPolicy240AA715",
+    "Roles": [
+     {
+      "Ref": "TasksFunctionServiceRole7A67749F"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/TasksFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "TasksFunction1A043ECB": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TASKS_TABLE": {
+       "Ref": "TasksTable88911DC5"
+      },
+      "PLANS_TABLE": {
+       "Ref": "PlansTableD3E3A972"
+      },
+      "INSIGHTS_TABLE": {
+       "Ref": "InsightsTableBE354BC6"
+      },
+      "NOTIFICATIONS_TABLE": {
+       "Ref": "NotificationsTable76DCFC6C"
+      },
+      "BEDROCK_MODEL_ID": "amazon.nova-lite-v1:0",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "focusflow-tasks-dev",
+    "Handler": "dist/handlers/tasks.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "TasksFunctionServiceRole7A67749F",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 15
+   },
+   "DependsOn": [
+    "TasksFunctionServiceRoleDefaultPolicy240AA715",
+    "TasksFunctionServiceRole7A67749F"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/TasksFunction/Resource",
+    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "TasksFunctionLogRetentionE755D97D": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "TasksFunction1A043ECB"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 14
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/TasksFunction/LogRetention/Resource"
+   }
+  },
+  "AIFunctionServiceRole7032A1D8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AIFunction/ServiceRole/Resource"
+   }
+  },
+  "AIFunctionServiceRoleDefaultPolicyF30F3250": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "TasksTable88911DC5",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "TasksTable88911DC5",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "InsightsTableBE354BC6",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      },
+      {
+       "Action": "bedrock:InvokeModel",
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AIFunctionServiceRoleDefaultPolicyF30F3250",
+    "Roles": [
+     {
+      "Ref": "AIFunctionServiceRole7032A1D8"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AIFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "AIFunction3DD9AA07": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TASKS_TABLE": {
+       "Ref": "TasksTable88911DC5"
+      },
+      "PLANS_TABLE": {
+       "Ref": "PlansTableD3E3A972"
+      },
+      "INSIGHTS_TABLE": {
+       "Ref": "InsightsTableBE354BC6"
+      },
+      "NOTIFICATIONS_TABLE": {
+       "Ref": "NotificationsTable76DCFC6C"
+      },
+      "BEDROCK_MODEL_ID": "amazon.nova-lite-v1:0",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "focusflow-ai-dev",
+    "Handler": "dist/handlers/ai.handler",
+    "MemorySize": 512,
+    "Role": {
+     "Fn::GetAtt": [
+      "AIFunctionServiceRole7032A1D8",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 60
+   },
+   "DependsOn": [
+    "AIFunctionServiceRoleDefaultPolicyF30F3250",
+    "AIFunctionServiceRole7032A1D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AIFunction/Resource",
+    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "AIFunctionLogRetention4F5F2C03": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "AIFunction3DD9AA07"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 14
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AIFunction/LogRetention/Resource"
+   }
+  },
+  "PlannerFunctionServiceRoleC9E6D47A": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PlannerFunction/ServiceRole/Resource"
+   }
+  },
+  "PlannerFunctionServiceRoleDefaultPolicyEF66685F": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "PlansTableD3E3A972",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "TasksTable88911DC5",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "TasksTable88911DC5",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "PlannerFunctionServiceRoleDefaultPolicyEF66685F",
+    "Roles": [
+     {
+      "Ref": "PlannerFunctionServiceRoleC9E6D47A"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PlannerFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "PlannerFunction7813D2C8": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TASKS_TABLE": {
+       "Ref": "TasksTable88911DC5"
+      },
+      "PLANS_TABLE": {
+       "Ref": "PlansTableD3E3A972"
+      },
+      "INSIGHTS_TABLE": {
+       "Ref": "InsightsTableBE354BC6"
+      },
+      "NOTIFICATIONS_TABLE": {
+       "Ref": "NotificationsTable76DCFC6C"
+      },
+      "BEDROCK_MODEL_ID": "amazon.nova-lite-v1:0",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "focusflow-planner-dev",
+    "Handler": "dist/handlers/planner.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "PlannerFunctionServiceRoleC9E6D47A",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 15
+   },
+   "DependsOn": [
+    "PlannerFunctionServiceRoleDefaultPolicyEF66685F",
+    "PlannerFunctionServiceRoleC9E6D47A"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PlannerFunction/Resource",
+    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "PlannerFunctionLogRetention59F367F5": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "PlannerFunction7813D2C8"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 14
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PlannerFunction/LogRetention/Resource"
+   }
+  },
+  "AnalyticsFunctionServiceRole4C6FF659": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AnalyticsFunction/ServiceRole/Resource"
+   }
+  },
+  "AnalyticsFunctionServiceRoleDefaultPolicy0F4B1A8C": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "TasksTable88911DC5",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "TasksTable88911DC5",
+             "Arn"
+            ]
+           },
+           "/index/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "AnalyticsFunctionServiceRoleDefaultPolicy0F4B1A8C",
+    "Roles": [
+     {
+      "Ref": "AnalyticsFunctionServiceRole4C6FF659"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AnalyticsFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "AnalyticsFunctionFF8C31E8": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TASKS_TABLE": {
+       "Ref": "TasksTable88911DC5"
+      },
+      "PLANS_TABLE": {
+       "Ref": "PlansTableD3E3A972"
+      },
+      "INSIGHTS_TABLE": {
+       "Ref": "InsightsTableBE354BC6"
+      },
+      "NOTIFICATIONS_TABLE": {
+       "Ref": "NotificationsTable76DCFC6C"
+      },
+      "BEDROCK_MODEL_ID": "amazon.nova-lite-v1:0",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "focusflow-analytics-dev",
+    "Handler": "dist/handlers/analytics.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "AnalyticsFunctionServiceRole4C6FF659",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 15
+   },
+   "DependsOn": [
+    "AnalyticsFunctionServiceRoleDefaultPolicy0F4B1A8C",
+    "AnalyticsFunctionServiceRole4C6FF659"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AnalyticsFunction/Resource",
+    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "AnalyticsFunctionLogRetention3886D16E": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "AnalyticsFunctionFF8C31E8"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 14
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/AnalyticsFunction/LogRetention/Resource"
+   }
+  },
+  "NotificationsFunctionServiceRole879987A8": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/NotificationsFunction/ServiceRole/Resource"
+   }
+  },
+  "NotificationsFunctionServiceRoleDefaultPolicy4C6646C3": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:GetRecords",
+        "dynamodb:GetShardIterator",
+        "dynamodb:Query",
+        "dynamodb:GetItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:PutItem",
+        "dynamodb:UpdateItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:DescribeTable"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "NotificationsTable76DCFC6C",
+          "Arn"
+         ]
+        },
+        {
+         "Ref": "AWS::NoValue"
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "NotificationsFunctionServiceRoleDefaultPolicy4C6646C3",
+    "Roles": [
+     {
+      "Ref": "NotificationsFunctionServiceRole879987A8"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/NotificationsFunction/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "NotificationsFunctionE347FB50": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TASKS_TABLE": {
+       "Ref": "TasksTable88911DC5"
+      },
+      "PLANS_TABLE": {
+       "Ref": "PlansTableD3E3A972"
+      },
+      "INSIGHTS_TABLE": {
+       "Ref": "InsightsTableBE354BC6"
+      },
+      "NOTIFICATIONS_TABLE": {
+       "Ref": "NotificationsTable76DCFC6C"
+      },
+      "BEDROCK_MODEL_ID": "amazon.nova-lite-v1:0",
+      "AWS_NODEJS_CONNECTION_REUSE_ENABLED": "1"
+     }
+    },
+    "FunctionName": "focusflow-notifications-dev",
+    "Handler": "dist/handlers/notifications.handler",
+    "MemorySize": 256,
+    "Role": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionServiceRole879987A8",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 15
+   },
+   "DependsOn": [
+    "NotificationsFunctionServiceRoleDefaultPolicy4C6646C3",
+    "NotificationsFunctionServiceRole879987A8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/NotificationsFunction/Resource",
+    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "NotificationsFunctionLogRetention5220B3A3": {
+   "Type": "Custom::LogRetention",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
+      "Arn"
+     ]
+    },
+    "LogGroupName": {
+     "Fn::Join": [
+      "",
+      [
+       "/aws/lambda/",
+       {
+        "Ref": "NotificationsFunctionE347FB50"
+       }
+      ]
+     ]
+    },
+    "RetentionInDays": 14
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/NotificationsFunction/LogRetention/Resource"
+   }
+  },
+  "FocusFlowApiA6D5887A": {
+   "Type": "AWS::ApiGateway::RestApi",
+   "Properties": {
+    "Name": "focusflow-api-dev"
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Resource"
+   }
+  },
+  "FocusFlowApiCloudWatchRole3CDA74CD": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "apigateway.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AmazonAPIGatewayPushToCloudWatchLogs"
+       ]
+      ]
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/CloudWatchRole/Resource"
+   }
+  },
+  "FocusFlowApiAccount04880DD6": {
+   "Type": "AWS::ApiGateway::Account",
+   "Properties": {
+    "CloudWatchRoleArn": {
+     "Fn::GetAtt": [
+      "FocusFlowApiCloudWatchRole3CDA74CD",
+      "Arn"
+     ]
+    }
+   },
+   "DependsOn": [
+    "FocusFlowApiA6D5887A"
+   ],
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Account"
+   }
+  },
+  "FocusFlowApiDeployment3F4BD8331029a67984f6e4e9cf52e4cdfc20e88b": {
+   "Type": "AWS::ApiGateway::Deployment",
+   "Properties": {
+    "Description": "Automatically created by the RestApi construct",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "DependsOn": [
+    "FocusFlowApiapiaibreakdownOPTIONSB4E1DEFA",
+    "FocusFlowApiapiaibreakdownPOST3E246DA2",
+    "FocusFlowApiapiaibreakdownE44ABE0D",
+    "FocusFlowApiapiaichatOPTIONSC141E9FA",
+    "FocusFlowApiapiaichatPOSTF4DD3E4F",
+    "FocusFlowApiapiaichat5230DA6D",
+    "FocusFlowApiapiaiinsightsGETD5E1E4A6",
+    "FocusFlowApiapiaiinsightsOPTIONS0744FC51",
+    "FocusFlowApiapiaiinsights7A85C4FF",
+    "FocusFlowApiapiaiOPTIONSB4455413",
+    "FocusFlowApiapiaiplanOPTIONS0519C0B2",
+    "FocusFlowApiapiaiplanPOSTDF7BD360",
+    "FocusFlowApiapiaiplan9F477A15",
+    "FocusFlowApiapiaiprioritizeOPTIONSADFE70F3",
+    "FocusFlowApiapiaiprioritizePOSTCA5D9A58",
+    "FocusFlowApiapiaiprioritizeF263C24F",
+    "FocusFlowApiapiaiF13449B6",
+    "FocusFlowApiapianalyticsGET71BF707B",
+    "FocusFlowApiapianalyticsOPTIONS19E11D9A",
+    "FocusFlowApiapianalytics175B0695",
+    "FocusFlowApiapiauthloginOPTIONSCB5902F8",
+    "FocusFlowApiapiauthloginPOST8D1B4BBF",
+    "FocusFlowApiapiauthlogin0E07241A",
+    "FocusFlowApiapiauthOPTIONS49DCED15",
+    "FocusFlowApiapiauthprofileGET2712CED5",
+    "FocusFlowApiapiauthprofileOPTIONSFE58F037",
+    "FocusFlowApiapiauthprofilePUT82D6C510",
+    "FocusFlowApiapiauthprofile85B77261",
+    "FocusFlowApiapiauthregisterOPTIONS892F3629",
+    "FocusFlowApiapiauthregisterPOSTFD5FDED9",
+    "FocusFlowApiapiauthregisterA17A0733",
+    "FocusFlowApiapiauthFBFF3D7B",
+    "FocusFlowApiapinotificationsidOPTIONS01446335",
+    "FocusFlowApiapinotificationsidreadOPTIONS570A526B",
+    "FocusFlowApiapinotificationsidreadPUTF21CB121",
+    "FocusFlowApiapinotificationsidread83644CDB",
+    "FocusFlowApiapinotificationsid0F509693",
+    "FocusFlowApiapinotificationsGET6452FE78",
+    "FocusFlowApiapinotificationsOPTIONSB3C12813",
+    "FocusFlowApiapinotificationsreadallOPTIONSE55FBAE5",
+    "FocusFlowApiapinotificationsreadallPUTED840B59",
+    "FocusFlowApiapinotificationsreadall745A1E91",
+    "FocusFlowApiapinotificationsDE2BB9FF",
+    "FocusFlowApiapiOPTIONS82ECB9FF",
+    "FocusFlowApiapiplannerdateGETEE2D1A17",
+    "FocusFlowApiapiplannerdateOPTIONSB1B04C25",
+    "FocusFlowApiapiplannerdateCB9C5D56",
+    "FocusFlowApiapiplannerOPTIONSCB1058D8",
+    "FocusFlowApiapiplannerPOSTF46C4471",
+    "FocusFlowApiapiplannerPUTC1DFFD43",
+    "FocusFlowApiapiplanner43DB4B5A",
+    "FocusFlowApiapiA7C31AC1",
+    "FocusFlowApiapitasksidDELETEA0B5A4FF",
+    "FocusFlowApiapitasksidGET4AE735FC",
+    "FocusFlowApiapitasksidOPTIONS2C63E018",
+    "FocusFlowApiapitasksidPUTB5A24987",
+    "FocusFlowApiapitasksidA746D34C",
+    "FocusFlowApiapitasksGET17176FCB",
+    "FocusFlowApiapitasksOPTIONSF25783CF",
+    "FocusFlowApiapitasksPOST523DAD7D",
+    "FocusFlowApiapitasks318E51E7",
+    "FocusFlowApiOPTIONSD2379DC1"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Deployment/Resource"
+   }
+  },
+  "FocusFlowApiDeploymentStagedev796413DA": {
+   "Type": "AWS::ApiGateway::Stage",
+   "Properties": {
+    "DeploymentId": {
+     "Ref": "FocusFlowApiDeployment3F4BD8331029a67984f6e4e9cf52e4cdfc20e88b"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    },
+    "StageName": "dev"
+   },
+   "DependsOn": [
+    "FocusFlowApiAccount04880DD6"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/DeploymentStage.dev/Resource"
+   }
+  },
+  "FocusFlowApiOPTIONSD2379DC1": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Fn::GetAtt": [
+      "FocusFlowApiA6D5887A",
+      "RootResourceId"
+     ]
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiA7C31AC1": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Fn::GetAtt": [
+      "FocusFlowApiA6D5887A",
+      "RootResourceId"
+     ]
+    },
+    "PathPart": "api",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/Resource"
+   }
+  },
+  "FocusFlowApiapiOPTIONS82ECB9FF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiauthFBFF3D7B": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "PathPart": "auth",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/Resource"
+   }
+  },
+  "FocusFlowApiapiauthOPTIONS49DCED15": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthFBFF3D7B"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiauthlogin0E07241A": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiauthFBFF3D7B"
+    },
+    "PathPart": "login",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/login/Resource"
+   }
+  },
+  "FocusFlowApiapiauthloginOPTIONSCB5902F8": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthlogin0E07241A"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/login/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiauthloginPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiauthloginFA8D70E4": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/auth/login"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.login"
+   }
+  },
+  "FocusFlowApiapiauthloginPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiauthlogin54376177": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/auth/login"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.login"
+   }
+  },
+  "FocusFlowApiapiauthloginPOST8D1B4BBF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AuthFunctionA1CD5E0F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthlogin0E07241A"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/login/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiauthregisterA17A0733": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiauthFBFF3D7B"
+    },
+    "PathPart": "register",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/register/Resource"
+   }
+  },
+  "FocusFlowApiapiauthregisterOPTIONS892F3629": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthregisterA17A0733"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/register/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiauthregisterPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiauthregisterBA1C12C7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/auth/register"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.register"
+   }
+  },
+  "FocusFlowApiapiauthregisterPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiauthregister3EE8C099": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/auth/register"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.auth.register"
+   }
+  },
+  "FocusFlowApiapiauthregisterPOSTFD5FDED9": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AuthFunctionA1CD5E0F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthregisterA17A0733"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/register/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiauthprofile85B77261": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiauthFBFF3D7B"
+    },
+    "PathPart": "profile",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/Resource"
+   }
+  },
+  "FocusFlowApiapiauthprofileOPTIONSFE58F037": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthprofile85B77261"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiauthprofileGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiauthprofileBF705DFF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/auth/profile"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.auth.profile"
+   }
+  },
+  "FocusFlowApiapiauthprofileGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiauthprofileA34824A8": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/auth/profile"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.auth.profile"
+   }
+  },
+  "FocusFlowApiapiauthprofileGET2712CED5": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AuthFunctionA1CD5E0F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthprofile85B77261"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/GET/Resource"
+   }
+  },
+  "FocusFlowApiapiauthprofilePUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapiauthprofileF57CD7C9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/PUT/api/auth/profile"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.auth.profile"
+   }
+  },
+  "FocusFlowApiapiauthprofilePUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapiauthprofile392BF443": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AuthFunctionA1CD5E0F",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/PUT/api/auth/profile"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.auth.profile"
+   }
+  },
+  "FocusFlowApiapiauthprofilePUT82D6C510": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AuthFunctionA1CD5E0F",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiauthprofile85B77261"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/auth/profile/PUT/Resource"
+   }
+  },
+  "FocusFlowApiapitasks318E51E7": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "PathPart": "tasks",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/Resource"
+   }
+  },
+  "FocusFlowApiapitasksOPTIONSF25783CF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasks318E51E7"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapitasksGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapitasksB235FF6D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/tasks"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks"
+   }
+  },
+  "FocusFlowApiapitasksGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapitasks489F88F9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/tasks"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks"
+   }
+  },
+  "FocusFlowApiapitasksGET17176FCB": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "TasksFunction1A043ECB",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasks318E51E7"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/GET/Resource"
+   }
+  },
+  "FocusFlowApiapitasksPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapitasks74B7A141": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/tasks"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.tasks"
+   }
+  },
+  "FocusFlowApiapitasksPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapitasks8DCE710C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/tasks"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.tasks"
+   }
+  },
+  "FocusFlowApiapitasksPOST523DAD7D": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "TasksFunction1A043ECB",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasks318E51E7"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/POST/Resource"
+   }
+  },
+  "FocusFlowApiapitasksidA746D34C": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapitasks318E51E7"
+    },
+    "PathPart": "{id}",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/Resource"
+   }
+  },
+  "FocusFlowApiapitasksidOPTIONS2C63E018": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasksidA746D34C"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapitasksidGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapitasksid405752FE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/tasks/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks.{id}"
+   }
+  },
+  "FocusFlowApiapitasksidGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapitasksid0A6909CF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/tasks/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.tasks.{id}"
+   }
+  },
+  "FocusFlowApiapitasksidGET4AE735FC": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "TasksFunction1A043ECB",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasksidA746D34C"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/GET/Resource"
+   }
+  },
+  "FocusFlowApiapitasksidPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapitasksid5003997E": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/PUT/api/tasks/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.tasks.{id}"
+   }
+  },
+  "FocusFlowApiapitasksidPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapitasksidEA18D3CF": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/PUT/api/tasks/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.tasks.{id}"
+   }
+  },
+  "FocusFlowApiapitasksidPUTB5A24987": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "TasksFunction1A043ECB",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasksidA746D34C"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/PUT/Resource"
+   }
+  },
+  "FocusFlowApiapitasksidDELETEApiPermissionFocusFlowStackFocusFlowApi074A9030DELETEapitasksid570B30C8": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/DELETE/api/tasks/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/ApiPermission.FocusFlowStackFocusFlowApi074A9030.DELETE..api.tasks.{id}"
+   }
+  },
+  "FocusFlowApiapitasksidDELETEApiPermissionTestFocusFlowStackFocusFlowApi074A9030DELETEapitasksid6521605A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "TasksFunction1A043ECB",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/DELETE/api/tasks/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.DELETE..api.tasks.{id}"
+   }
+  },
+  "FocusFlowApiapitasksidDELETEA0B5A4FF": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "DELETE",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "TasksFunction1A043ECB",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapitasksidA746D34C"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/tasks/{id}/DELETE/Resource"
+   }
+  },
+  "FocusFlowApiapiaiF13449B6": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "PathPart": "ai",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/Resource"
+   }
+  },
+  "FocusFlowApiapiaiOPTIONSB4455413": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiF13449B6"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiaichat5230DA6D": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiaiF13449B6"
+    },
+    "PathPart": "chat",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/chat/Resource"
+   }
+  },
+  "FocusFlowApiapiaichatOPTIONSC141E9FA": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaichat5230DA6D"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/chat/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiaichatPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaichat97BFE128": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/ai/chat"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.chat"
+   }
+  },
+  "FocusFlowApiapiaichatPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaichatDE4F5B37": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/ai/chat"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.chat"
+   }
+  },
+  "FocusFlowApiapiaichatPOSTF4DD3E4F": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AIFunction3DD9AA07",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaichat5230DA6D"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/chat/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiaiprioritizeF263C24F": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiaiF13449B6"
+    },
+    "PathPart": "prioritize",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/Resource"
+   }
+  },
+  "FocusFlowApiapiaiprioritizeOPTIONSADFE70F3": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiprioritizeF263C24F"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiaiprioritizePOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaiprioritizeE5626E6A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/ai/prioritize"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.prioritize"
+   }
+  },
+  "FocusFlowApiapiaiprioritizePOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaiprioritizeF8539BE7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/ai/prioritize"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.prioritize"
+   }
+  },
+  "FocusFlowApiapiaiprioritizePOSTCA5D9A58": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AIFunction3DD9AA07",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiprioritizeF263C24F"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/prioritize/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiaibreakdownE44ABE0D": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiaiF13449B6"
+    },
+    "PathPart": "breakdown",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/Resource"
+   }
+  },
+  "FocusFlowApiapiaibreakdownOPTIONSB4E1DEFA": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaibreakdownE44ABE0D"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiaibreakdownPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaibreakdownF46D0C03": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/ai/breakdown"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.breakdown"
+   }
+  },
+  "FocusFlowApiapiaibreakdownPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaibreakdown59D8D0D1": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/ai/breakdown"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.breakdown"
+   }
+  },
+  "FocusFlowApiapiaibreakdownPOST3E246DA2": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AIFunction3DD9AA07",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaibreakdownE44ABE0D"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/breakdown/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiaiplan9F477A15": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiaiF13449B6"
+    },
+    "PathPart": "plan",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/plan/Resource"
+   }
+  },
+  "FocusFlowApiapiaiplanOPTIONS0519C0B2": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiplan9F477A15"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/plan/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiaiplanPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiaiplan977990D9": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/ai/plan"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.plan"
+   }
+  },
+  "FocusFlowApiapiaiplanPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiaiplan68190979": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/ai/plan"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.ai.plan"
+   }
+  },
+  "FocusFlowApiapiaiplanPOSTDF7BD360": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AIFunction3DD9AA07",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiplan9F477A15"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/plan/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiaiinsights7A85C4FF": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiaiF13449B6"
+    },
+    "PathPart": "insights",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/insights/Resource"
+   }
+  },
+  "FocusFlowApiapiaiinsightsOPTIONS0744FC51": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiinsights7A85C4FF"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/insights/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiaiinsightsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiaiinsightsF0C87693": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/ai/insights"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.ai.insights"
+   }
+  },
+  "FocusFlowApiapiaiinsightsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiaiinsights4E69173C": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AIFunction3DD9AA07",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/ai/insights"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.ai.insights"
+   }
+  },
+  "FocusFlowApiapiaiinsightsGETD5E1E4A6": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AIFunction3DD9AA07",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiaiinsights7A85C4FF"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/ai/insights/GET/Resource"
+   }
+  },
+  "FocusFlowApiapiplanner43DB4B5A": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "PathPart": "planner",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/Resource"
+   }
+  },
+  "FocusFlowApiapiplannerOPTIONSCB1058D8": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiplanner43DB4B5A"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiplannerPOSTApiPermissionFocusFlowStackFocusFlowApi074A9030POSTapiplanner265FED88": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlannerFunction7813D2C8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/POST/api/planner"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/POST/ApiPermission.FocusFlowStackFocusFlowApi074A9030.POST..api.planner"
+   }
+  },
+  "FocusFlowApiapiplannerPOSTApiPermissionTestFocusFlowStackFocusFlowApi074A9030POSTapiplanner4B8EED20": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlannerFunction7813D2C8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/POST/api/planner"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/POST/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.POST..api.planner"
+   }
+  },
+  "FocusFlowApiapiplannerPOSTF46C4471": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "POST",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "PlannerFunction7813D2C8",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiplanner43DB4B5A"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/POST/Resource"
+   }
+  },
+  "FocusFlowApiapiplannerPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapiplannerEF3C058A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlannerFunction7813D2C8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/PUT/api/planner"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.planner"
+   }
+  },
+  "FocusFlowApiapiplannerPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapiplanner581D2FA6": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlannerFunction7813D2C8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/PUT/api/planner"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.planner"
+   }
+  },
+  "FocusFlowApiapiplannerPUTC1DFFD43": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "PlannerFunction7813D2C8",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiplanner43DB4B5A"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/PUT/Resource"
+   }
+  },
+  "FocusFlowApiapiplannerdateCB9C5D56": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiplanner43DB4B5A"
+    },
+    "PathPart": "{date}",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/Resource"
+   }
+  },
+  "FocusFlowApiapiplannerdateOPTIONSB1B04C25": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiplannerdateCB9C5D56"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapiplannerdateGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapiplannerdate5B898085": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlannerFunction7813D2C8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/planner/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.planner.{date}"
+   }
+  },
+  "FocusFlowApiapiplannerdateGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapiplannerdate93B26444": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PlannerFunction7813D2C8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/planner/*"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.planner.{date}"
+   }
+  },
+  "FocusFlowApiapiplannerdateGETEE2D1A17": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "PlannerFunction7813D2C8",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapiplannerdateCB9C5D56"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/planner/{date}/GET/Resource"
+   }
+  },
+  "FocusFlowApiapianalytics175B0695": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "PathPart": "analytics",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/analytics/Resource"
+   }
+  },
+  "FocusFlowApiapianalyticsOPTIONS19E11D9A": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapianalytics175B0695"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/analytics/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapianalyticsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapianalyticsD149A209": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AnalyticsFunctionFF8C31E8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/analytics"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.analytics"
+   }
+  },
+  "FocusFlowApiapianalyticsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapianalyticsF4BA6060": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "AnalyticsFunctionFF8C31E8",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/analytics"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.analytics"
+   }
+  },
+  "FocusFlowApiapianalyticsGET71BF707B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "AnalyticsFunctionFF8C31E8",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapianalytics175B0695"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/analytics/GET/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsDE2BB9FF": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapiA7C31AC1"
+    },
+    "PathPart": "notifications",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsOPTIONSB3C12813": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsDE2BB9FF"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsGETApiPermissionFocusFlowStackFocusFlowApi074A9030GETapinotifications5D840468": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionE347FB50",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/GET/api/notifications"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/ApiPermission.FocusFlowStackFocusFlowApi074A9030.GET..api.notifications"
+   }
+  },
+  "FocusFlowApiapinotificationsGETApiPermissionTestFocusFlowStackFocusFlowApi074A9030GETapinotifications2BA50740": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionE347FB50",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/GET/api/notifications"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.GET..api.notifications"
+   }
+  },
+  "FocusFlowApiapinotificationsGET6452FE78": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "GET",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "NotificationsFunctionE347FB50",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsDE2BB9FF"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/GET/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsreadall745A1E91": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapinotificationsDE2BB9FF"
+    },
+    "PathPart": "read-all",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsreadallOPTIONSE55FBAE5": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsreadall745A1E91"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsreadallPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapinotificationsreadallB30FA2C6": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionE347FB50",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/PUT/api/notifications/read-all"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.read-all"
+   }
+  },
+  "FocusFlowApiapinotificationsreadallPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapinotificationsreadall5A8ABE71": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionE347FB50",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/PUT/api/notifications/read-all"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.read-all"
+   }
+  },
+  "FocusFlowApiapinotificationsreadallPUTED840B59": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "NotificationsFunctionE347FB50",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsreadall745A1E91"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/read-all/PUT/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsid0F509693": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapinotificationsDE2BB9FF"
+    },
+    "PathPart": "{id}",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsidOPTIONS01446335": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsid0F509693"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsidread83644CDB": {
+   "Type": "AWS::ApiGateway::Resource",
+   "Properties": {
+    "ParentId": {
+     "Ref": "FocusFlowApiapinotificationsid0F509693"
+    },
+    "PathPart": "read",
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsidreadOPTIONS570A526B": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "ApiKeyRequired": false,
+    "AuthorizationType": "NONE",
+    "HttpMethod": "OPTIONS",
+    "Integration": {
+     "IntegrationResponses": [
+      {
+       "ResponseParameters": {
+        "method.response.header.Access-Control-Allow-Headers": "'Content-Type,Authorization,X-Amz-Date,X-Api-Key'",
+        "method.response.header.Access-Control-Allow-Origin": "'*'",
+        "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'"
+       },
+       "StatusCode": "204"
+      }
+     ],
+     "RequestTemplates": {
+      "application/json": "{ statusCode: 200 }"
+     },
+     "Type": "MOCK"
+    },
+    "MethodResponses": [
+     {
+      "ResponseParameters": {
+       "method.response.header.Access-Control-Allow-Headers": true,
+       "method.response.header.Access-Control-Allow-Origin": true,
+       "method.response.header.Access-Control-Allow-Methods": true
+      },
+      "StatusCode": "204"
+     }
+    ],
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsidread83644CDB"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/OPTIONS/Resource"
+   }
+  },
+  "FocusFlowApiapinotificationsidreadPUTApiPermissionFocusFlowStackFocusFlowApi074A9030PUTapinotificationsidreadF1DA3ADE": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionE347FB50",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/",
+       {
+        "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+       },
+       "/PUT/api/notifications/*/read"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/ApiPermission.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.{id}.read"
+   }
+  },
+  "FocusFlowApiapinotificationsidreadPUTApiPermissionTestFocusFlowStackFocusFlowApi074A9030PUTapinotificationsidreadB8346B6B": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "NotificationsFunctionE347FB50",
+      "Arn"
+     ]
+    },
+    "Principal": "apigateway.amazonaws.com",
+    "SourceArn": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":execute-api:us-east-1:466742534146:",
+       {
+        "Ref": "FocusFlowApiA6D5887A"
+       },
+       "/test-invoke-stage/PUT/api/notifications/*/read"
+      ]
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/ApiPermission.Test.FocusFlowStackFocusFlowApi074A9030.PUT..api.notifications.{id}.read"
+   }
+  },
+  "FocusFlowApiapinotificationsidreadPUTF21CB121": {
+   "Type": "AWS::ApiGateway::Method",
+   "Properties": {
+    "AuthorizationType": "NONE",
+    "HttpMethod": "PUT",
+    "Integration": {
+     "IntegrationHttpMethod": "POST",
+     "Type": "AWS_PROXY",
+     "Uri": {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":apigateway:us-east-1:lambda:path/2015-03-31/functions/",
+        {
+         "Fn::GetAtt": [
+          "NotificationsFunctionE347FB50",
+          "Arn"
+         ]
+        },
+        "/invocations"
+       ]
+      ]
+     }
+    },
+    "ResourceId": {
+     "Ref": "FocusFlowApiapinotificationsidread83644CDB"
+    },
+    "RestApiId": {
+     "Ref": "FocusFlowApiA6D5887A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/FocusFlowApi/Default/api/notifications/{id}/read/PUT/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02PQW/CMAyFfwv34A3QtjMw7bRpqGxnlKamC6RxVTtDVZT/PjWF0dP74vfk5yxh8fIMjzN94bmpznNnS4h70eas9IUPseq9bqgqIX7p0qHaHn2GpAzV3gpB/GbsdkRu8P75Bltn0cvUGidJOd2UlYb4FrwRS37ITHmHXWOZLfmkrG4gFjT2Z92Rs6bPuUxJ8eqgmVEY1oMoXsEmmDPKRjMqRzXDO9UFCvpcoVtba8GL7iEWyLJubd5+x7UxFLyoV2wd9c31H5PXXnSdTxqhQKbQGcyFHyg/VA3mlW7utSRzSvdxvnpYZH09zQz8GaQNkpSnCuHED7/LJSyeYDE7sbXzLnixDUIx6h9p9US00wEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "FocusFlowApiEndpoint96CF1AD1": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "FocusFlowApiA6D5887A"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "ApiUrl": {
+   "Description": "API Gateway URL",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "FocusFlowApiA6D5887A"
+      },
+      ".execute-api.us-east-1.",
+      {
+       "Ref": "AWS::URLSuffix"
+      },
+      "/",
+      {
+       "Ref": "FocusFlowApiDeploymentStagedev796413DA"
+      },
+      "/"
+     ]
+    ]
+   }
+  },
+  "UserPoolId": {
+   "Value": {
+    "Ref": "UserPool6BA7E5F2"
+   }
+  },
+  "UserPoolClientId": {
+   "Value": {
+    "Ref": "UserPoolClient2F5918F7"
+   }
+  },
+  "TasksTableName": {
+   "Value": {
+    "Ref": "TasksTable88911DC5"
+   }
+  },
+  "Region": {
+   "Value": "us-east-1"
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
