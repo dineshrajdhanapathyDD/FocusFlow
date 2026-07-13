@@ -253,10 +253,579 @@
               "version": "2.176.0"
             }
           },
+          "PreSignUpTrigger": {
+            "id": "PreSignUpTrigger",
+            "path": "FocusFlowStack/PreSignUpTrigger",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "FocusFlowStack/PreSignUpTrigger/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "FocusFlowStack/PreSignUpTrigger/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.176.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "FocusFlowStack/PreSignUpTrigger/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.176.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.176.0"
+                }
+              },
+              "Code": {
+                "id": "Code",
+                "path": "FocusFlowStack/PreSignUpTrigger/Code",
+                "children": {
+                  "Stage": {
+                    "id": "Stage",
+                    "path": "FocusFlowStack/PreSignUpTrigger/Code/Stage",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.AssetStaging",
+                      "version": "2.176.0"
+                    }
+                  },
+                  "AssetBucket": {
+                    "id": "AssetBucket",
+                    "path": "FocusFlowStack/PreSignUpTrigger/Code/AssetBucket",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_s3.BucketBase",
+                      "version": "2.176.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3_assets.Asset",
+                  "version": "2.176.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "FocusFlowStack/PreSignUpTrigger/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "architectures": [
+                      "arm64"
+                    ],
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+                    },
+                    "functionName": "focusflow-cognito-pre-signup",
+                    "handler": "dist/cognito-triggers/pre-sign-up.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "PreSignUpTriggerServiceRoleAB515258",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs20.x",
+                    "timeout": 5
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.176.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.176.0"
+            }
+          },
+          "DefineAuthChallenge": {
+            "id": "DefineAuthChallenge",
+            "path": "FocusFlowStack/DefineAuthChallenge",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "FocusFlowStack/DefineAuthChallenge/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "FocusFlowStack/DefineAuthChallenge/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.176.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "FocusFlowStack/DefineAuthChallenge/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.176.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.176.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "FocusFlowStack/DefineAuthChallenge/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "architectures": [
+                      "arm64"
+                    ],
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+                    },
+                    "functionName": "focusflow-cognito-define-auth",
+                    "handler": "dist/cognito-triggers/define-auth-challenge.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "DefineAuthChallengeServiceRole1D83696B",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs20.x",
+                    "timeout": 5
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.176.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.176.0"
+            }
+          },
+          "CreateAuthChallenge": {
+            "id": "CreateAuthChallenge",
+            "path": "FocusFlowStack/CreateAuthChallenge",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "FocusFlowStack/CreateAuthChallenge/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "FocusFlowStack/CreateAuthChallenge/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.176.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "FocusFlowStack/CreateAuthChallenge/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.176.0"
+                    }
+                  },
+                  "DefaultPolicy": {
+                    "id": "DefaultPolicy",
+                    "path": "FocusFlowStack/CreateAuthChallenge/ServiceRole/DefaultPolicy",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "FocusFlowStack/CreateAuthChallenge/ServiceRole/DefaultPolicy/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::IAM::Policy",
+                          "aws:cdk:cloudformation:props": {
+                            "policyDocument": {
+                              "Statement": [
+                                {
+                                  "Action": [
+                                    "ses:SendEmail",
+                                    "ses:SendRawEmail"
+                                  ],
+                                  "Effect": "Allow",
+                                  "Resource": "*"
+                                }
+                              ],
+                              "Version": "2012-10-17"
+                            },
+                            "policyName": "CreateAuthChallengeServiceRoleDefaultPolicy637265A4",
+                            "roles": [
+                              {
+                                "Ref": "CreateAuthChallengeServiceRoleCE50EC04"
+                              }
+                            ]
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_iam.CfnPolicy",
+                          "version": "2.176.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.Policy",
+                      "version": "2.176.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.176.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "FocusFlowStack/CreateAuthChallenge/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "architectures": [
+                      "arm64"
+                    ],
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+                    },
+                    "environment": {
+                      "variables": {
+                        "FROM_EMAIL": "noreply@focusflow.ai"
+                      }
+                    },
+                    "functionName": "focusflow-cognito-create-auth",
+                    "handler": "dist/cognito-triggers/create-auth-challenge.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "CreateAuthChallengeServiceRoleCE50EC04",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs20.x",
+                    "timeout": 10
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.176.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.176.0"
+            }
+          },
+          "VerifyAuthChallenge": {
+            "id": "VerifyAuthChallenge",
+            "path": "FocusFlowStack/VerifyAuthChallenge",
+            "children": {
+              "ServiceRole": {
+                "id": "ServiceRole",
+                "path": "FocusFlowStack/VerifyAuthChallenge/ServiceRole",
+                "children": {
+                  "ImportServiceRole": {
+                    "id": "ImportServiceRole",
+                    "path": "FocusFlowStack/VerifyAuthChallenge/ServiceRole/ImportServiceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.176.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "FocusFlowStack/VerifyAuthChallenge/ServiceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "lambda.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "managedPolicyArns": [
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                "arn:",
+                                {
+                                  "Ref": "AWS::Partition"
+                                },
+                                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.176.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.176.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "FocusFlowStack/VerifyAuthChallenge/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Function",
+                  "aws:cdk:cloudformation:props": {
+                    "architectures": [
+                      "arm64"
+                    ],
+                    "code": {
+                      "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+                    },
+                    "functionName": "focusflow-cognito-verify-auth",
+                    "handler": "dist/cognito-triggers/verify-auth-challenge.handler",
+                    "role": {
+                      "Fn::GetAtt": [
+                        "VerifyAuthChallengeServiceRole0AEAA465",
+                        "Arn"
+                      ]
+                    },
+                    "runtime": "nodejs20.x",
+                    "timeout": 5
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnFunction",
+                  "version": "2.176.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_lambda.Function",
+              "version": "2.176.0"
+            }
+          },
           "UserPool": {
             "id": "UserPool",
             "path": "FocusFlowStack/UserPool",
             "children": {
+              "PreSignUpCognito": {
+                "id": "PreSignUpCognito",
+                "path": "FocusFlowStack/UserPool/PreSignUpCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "PreSignUpTriggerCA35AAD7",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "UserPool6BA7E5F2",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.176.0"
+                }
+              },
+              "DefineAuthChallengeCognito": {
+                "id": "DefineAuthChallengeCognito",
+                "path": "FocusFlowStack/UserPool/DefineAuthChallengeCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "DefineAuthChallengeE7E3BC7B",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "UserPool6BA7E5F2",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.176.0"
+                }
+              },
+              "CreateAuthChallengeCognito": {
+                "id": "CreateAuthChallengeCognito",
+                "path": "FocusFlowStack/UserPool/CreateAuthChallengeCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "CreateAuthChallengeB2F8D873",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "UserPool6BA7E5F2",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.176.0"
+                }
+              },
+              "VerifyAuthChallengeResponseCognito": {
+                "id": "VerifyAuthChallengeResponseCognito",
+                "path": "FocusFlowStack/UserPool/VerifyAuthChallengeResponseCognito",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::Lambda::Permission",
+                  "aws:cdk:cloudformation:props": {
+                    "action": "lambda:InvokeFunction",
+                    "functionName": {
+                      "Fn::GetAtt": [
+                        "VerifyAuthChallenge610ED36B",
+                        "Arn"
+                      ]
+                    },
+                    "principal": "cognito-idp.amazonaws.com",
+                    "sourceArn": {
+                      "Fn::GetAtt": [
+                        "UserPool6BA7E5F2",
+                        "Arn"
+                      ]
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_lambda.CfnPermission",
+                  "version": "2.176.0"
+                }
+              },
               "Resource": {
                 "id": "Resource",
                 "path": "FocusFlowStack/UserPool/Resource",
@@ -283,6 +852,32 @@
                     ],
                     "emailVerificationMessage": "The verification code to your new account is {####}",
                     "emailVerificationSubject": "Verify your new account",
+                    "lambdaConfig": {
+                      "preSignUp": {
+                        "Fn::GetAtt": [
+                          "PreSignUpTriggerCA35AAD7",
+                          "Arn"
+                        ]
+                      },
+                      "defineAuthChallenge": {
+                        "Fn::GetAtt": [
+                          "DefineAuthChallengeE7E3BC7B",
+                          "Arn"
+                        ]
+                      },
+                      "createAuthChallenge": {
+                        "Fn::GetAtt": [
+                          "CreateAuthChallengeB2F8D873",
+                          "Arn"
+                        ]
+                      },
+                      "verifyAuthChallengeResponse": {
+                        "Fn::GetAtt": [
+                          "VerifyAuthChallenge610ED36B",
+                          "Arn"
+                        ]
+                      }
+                    },
                     "policies": {
                       "passwordPolicy": {
                         "minimumLength": 8,
@@ -356,6 +951,7 @@
                     "clientName": "focusflow-app-dev",
                     "explicitAuthFlows": [
                       "ALLOW_USER_PASSWORD_AUTH",
+                      "ALLOW_CUSTOM_AUTH",
                       "ALLOW_USER_SRP_AUTH",
                       "ALLOW_REFRESH_TOKEN_AUTH"
                     ],
@@ -478,7 +1074,7 @@
                     ],
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-                      "s3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
                     },
                     "environment": {
                       "variables": {
@@ -836,7 +1432,7 @@
                     ],
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-                      "s3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
                     },
                     "environment": {
                       "variables": {
@@ -1080,7 +1676,7 @@
                     ],
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-                      "s3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
                     },
                     "environment": {
                       "variables": {
@@ -1319,7 +1915,7 @@
                     ],
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-                      "s3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
                     },
                     "environment": {
                       "variables": {
@@ -1530,7 +2126,7 @@
                     ],
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-                      "s3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
                     },
                     "environment": {
                       "variables": {
@@ -1734,7 +2330,7 @@
                     ],
                     "code": {
                       "s3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-                      "s3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+                      "s3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
                     },
                     "environment": {
                       "variables": {

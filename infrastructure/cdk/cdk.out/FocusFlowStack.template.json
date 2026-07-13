@@ -161,6 +161,387 @@
     "aws:cdk:path": "FocusFlowStack/NotificationsTable/Resource"
    }
   },
+  "PreSignUpTriggerServiceRoleAB515258": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PreSignUpTrigger/ServiceRole/Resource"
+   }
+  },
+  "PreSignUpTriggerCA35AAD7": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+    },
+    "FunctionName": "focusflow-cognito-pre-signup",
+    "Handler": "dist/cognito-triggers/pre-sign-up.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "PreSignUpTriggerServiceRoleAB515258",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "PreSignUpTriggerServiceRoleAB515258"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/PreSignUpTrigger/Resource",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DefineAuthChallengeServiceRole1D83696B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/DefineAuthChallenge/ServiceRole/Resource"
+   }
+  },
+  "DefineAuthChallengeE7E3BC7B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+    },
+    "FunctionName": "focusflow-cognito-define-auth",
+    "Handler": "dist/cognito-triggers/define-auth-challenge.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "DefineAuthChallengeServiceRole1D83696B",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "DefineAuthChallengeServiceRole1D83696B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/DefineAuthChallenge/Resource",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "CreateAuthChallengeServiceRoleCE50EC04": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/CreateAuthChallenge/ServiceRole/Resource"
+   }
+  },
+  "CreateAuthChallengeServiceRoleDefaultPolicy637265A4": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ses:SendEmail",
+        "ses:SendRawEmail"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CreateAuthChallengeServiceRoleDefaultPolicy637265A4",
+    "Roles": [
+     {
+      "Ref": "CreateAuthChallengeServiceRoleCE50EC04"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/CreateAuthChallenge/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "CreateAuthChallengeB2F8D873": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "FROM_EMAIL": "noreply@focusflow.ai"
+     }
+    },
+    "FunctionName": "focusflow-cognito-create-auth",
+    "Handler": "dist/cognito-triggers/create-auth-challenge.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CreateAuthChallengeServiceRoleCE50EC04",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 10
+   },
+   "DependsOn": [
+    "CreateAuthChallengeServiceRoleDefaultPolicy637265A4",
+    "CreateAuthChallengeServiceRoleCE50EC04"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/CreateAuthChallenge/Resource",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "VerifyAuthChallengeServiceRole0AEAA465": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/VerifyAuthChallenge/ServiceRole/Resource"
+   }
+  },
+  "VerifyAuthChallenge610ED36B": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Architectures": [
+     "arm64"
+    ],
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
+    },
+    "FunctionName": "focusflow-cognito-verify-auth",
+    "Handler": "dist/cognito-triggers/verify-auth-challenge.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "VerifyAuthChallengeServiceRole0AEAA465",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs20.x",
+    "Timeout": 5
+   },
+   "DependsOn": [
+    "VerifyAuthChallengeServiceRole0AEAA465"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/VerifyAuthChallenge/Resource",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "UserPoolPreSignUpCognito3AFF8F1F": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PreSignUpTriggerCA35AAD7",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/UserPool/PreSignUpCognito"
+   }
+  },
+  "UserPoolDefineAuthChallengeCognitoD6D10D9D": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DefineAuthChallengeE7E3BC7B",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/UserPool/DefineAuthChallengeCognito"
+   }
+  },
+  "UserPoolCreateAuthChallengeCognito07327B9A": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "CreateAuthChallengeB2F8D873",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/UserPool/CreateAuthChallengeCognito"
+   }
+  },
+  "UserPoolVerifyAuthChallengeResponseCognito338D71F3": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "VerifyAuthChallenge610ED36B",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "FocusFlowStack/UserPool/VerifyAuthChallengeResponseCognito"
+   }
+  },
   "UserPool6BA7E5F2": {
    "Type": "AWS::Cognito::UserPool",
    "Properties": {
@@ -184,6 +565,32 @@
     ],
     "EmailVerificationMessage": "The verification code to your new account is {####}",
     "EmailVerificationSubject": "Verify your new account",
+    "LambdaConfig": {
+     "CreateAuthChallenge": {
+      "Fn::GetAtt": [
+       "CreateAuthChallengeB2F8D873",
+       "Arn"
+      ]
+     },
+     "DefineAuthChallenge": {
+      "Fn::GetAtt": [
+       "DefineAuthChallengeE7E3BC7B",
+       "Arn"
+      ]
+     },
+     "PreSignUp": {
+      "Fn::GetAtt": [
+       "PreSignUpTriggerCA35AAD7",
+       "Arn"
+      ]
+     },
+     "VerifyAuthChallengeResponse": {
+      "Fn::GetAtt": [
+       "VerifyAuthChallenge610ED36B",
+       "Arn"
+      ]
+     }
+    },
     "Policies": {
      "PasswordPolicy": {
       "MinimumLength": 8,
@@ -244,6 +651,7 @@
     "ClientName": "focusflow-app-dev",
     "ExplicitAuthFlows": [
      "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_CUSTOM_AUTH",
      "ALLOW_USER_SRP_AUTH",
      "ALLOW_REFRESH_TOKEN_AUTH"
     ],
@@ -302,7 +710,7 @@
     ],
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
     },
     "Environment": {
      "Variables": {
@@ -339,7 +747,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/AuthFunction/Resource",
-    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -559,7 +967,7 @@
     ],
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
     },
     "Environment": {
      "Variables": {
@@ -597,7 +1005,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/TasksFunction/Resource",
-    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -757,7 +1165,7 @@
     ],
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
     },
     "Environment": {
      "Variables": {
@@ -795,7 +1203,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/AIFunction/Resource",
-    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -950,7 +1358,7 @@
     ],
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
     },
     "Environment": {
      "Variables": {
@@ -988,7 +1396,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/PlannerFunction/Resource",
-    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -1115,7 +1523,7 @@
     ],
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
     },
     "Environment": {
      "Variables": {
@@ -1153,7 +1561,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/AnalyticsFunction/Resource",
-    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -1273,7 +1681,7 @@
     ],
     "Code": {
      "S3Bucket": "cdk-hnb659fds-assets-466742534146-us-east-1",
-     "S3Key": "d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d.zip"
+     "S3Key": "12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0.zip"
     },
     "Environment": {
      "Variables": {
@@ -1311,7 +1719,7 @@
    ],
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/NotificationsFunction/Resource",
-    "aws:asset:path": "asset.d3ea268fd54de27a21595b4fc6b8482304346529ee1ba1d5ec19c4274cd6d38d",
+    "aws:asset:path": "asset.12fc3f5fcba515ca9cf78db88c281fe936622c9e7f421079a3efc7bd06747fa0",
     "aws:asset:is-bundled": false,
     "aws:asset:property": "Code"
    }
@@ -4959,7 +5367,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02PQW/CMAyFfwv34A3QtjMw7bRpqGxnlKamC6RxVTtDVZT/PjWF0dP74vfk5yxh8fIMjzN94bmpznNnS4h70eas9IUPseq9bqgqIX7p0qHaHn2GpAzV3gpB/GbsdkRu8P75Bltn0cvUGidJOd2UlYb4FrwRS37ITHmHXWOZLfmkrG4gFjT2Z92Rs6bPuUxJ8eqgmVEY1oMoXsEmmDPKRjMqRzXDO9UFCvpcoVtba8GL7iEWyLJubd5+x7UxFLyoV2wd9c31H5PXXnSdTxqhQKbQGcyFHyg/VA3mlW7utSRzSvdxvnpYZH09zQz8GaQNkpSnCuHED7/LJSyeYDE7sbXzLnixDUIx6h9p9US00wEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/02PQW/CMAyFfwv34A3QtjMw7bRpqGxnlKamC6RxVTtDVZT/PjWF0dP74mc7z0tYvDzD40xfeG6q89zZEuJetDkrfeFDrHqvG6pKiF+6dKi2R58hKaebstIQ34I3YskP1pR32DWW2ZJPyuoGYkHjfNYdOWv63JcpKV4dNDMKw3oQxSvYBHNG2WhGZaj2VgjiN2O3I3LD6D/fYOsseplaYyUpRzXDO9UFCvocUbe21oIX3UMskGXd2pzujmtjKHhRr9g66pvr5slrL7rOJ41QIFPoDObAHyg/VA3mlW7u9ZPMKd3L+ephkfX1tGfgzyBtkKQ8VQgnfvhdLmHxBIvZia2dd8GLbRCKUf8A6jl9WtMBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "FocusFlowStack/CDKMetadata/Default"

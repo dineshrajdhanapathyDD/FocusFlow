@@ -82,6 +82,50 @@ class FocusFlowStack extends cdk.Stack {
             timeToLiveAttribute: 'ttl',
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
+        // ===== Cognito Lambda Triggers =====
+        const triggerCode = lambda.Code.fromAsset(path.join(__dirname, '../../../backend'), {
+            exclude: ['src', '*.ts', 'tsconfig.json', '.env', '.env.example'],
+        });
+        const preSignUpFn = new lambda.Function(this, 'PreSignUpTrigger', {
+            functionName: 'focusflow-cognito-pre-signup',
+            runtime: lambda.Runtime.NODEJS_20_X,
+            handler: 'dist/cognito-triggers/pre-sign-up.handler',
+            code: triggerCode,
+            timeout: cdk.Duration.seconds(5),
+            architecture: lambda.Architecture.ARM_64,
+        });
+        const defineAuthFn = new lambda.Function(this, 'DefineAuthChallenge', {
+            functionName: 'focusflow-cognito-define-auth',
+            runtime: lambda.Runtime.NODEJS_20_X,
+            handler: 'dist/cognito-triggers/define-auth-challenge.handler',
+            code: triggerCode,
+            timeout: cdk.Duration.seconds(5),
+            architecture: lambda.Architecture.ARM_64,
+        });
+        const createAuthFn = new lambda.Function(this, 'CreateAuthChallenge', {
+            functionName: 'focusflow-cognito-create-auth',
+            runtime: lambda.Runtime.NODEJS_20_X,
+            handler: 'dist/cognito-triggers/create-auth-challenge.handler',
+            code: triggerCode,
+            timeout: cdk.Duration.seconds(10),
+            architecture: lambda.Architecture.ARM_64,
+            environment: {
+                FROM_EMAIL: 'noreply@focusflow.ai',
+            },
+        });
+        // Grant SES send permission to create-auth trigger
+        createAuthFn.addToRolePolicy(new iam.PolicyStatement({
+            actions: ['ses:SendEmail', 'ses:SendRawEmail'],
+            resources: ['*'],
+        }));
+        const verifyAuthFn = new lambda.Function(this, 'VerifyAuthChallenge', {
+            functionName: 'focusflow-cognito-verify-auth',
+            runtime: lambda.Runtime.NODEJS_20_X,
+            handler: 'dist/cognito-triggers/verify-auth-challenge.handler',
+            code: triggerCode,
+            timeout: cdk.Duration.seconds(5),
+            architecture: lambda.Architecture.ARM_64,
+        });
         // ===== Cognito =====
         const userPool = new cognito.UserPool(this, 'UserPool', {
             userPoolName: 'focusflow-users-dev',
@@ -99,6 +143,12 @@ class FocusFlowStack extends cdk.Stack {
                 fullname: { required: true, mutable: true },
                 email: { required: true, mutable: false },
             },
+            lambdaTriggers: {
+                preSignUp: preSignUpFn,
+                defineAuthChallenge: defineAuthFn,
+                createAuthChallenge: createAuthFn,
+                verifyAuthChallengeResponse: verifyAuthFn,
+            },
             removalPolicy: cdk.RemovalPolicy.RETAIN,
         });
         const userPoolClient = new cognito.UserPoolClient(this, 'UserPoolClient', {
@@ -108,6 +158,7 @@ class FocusFlowStack extends cdk.Stack {
             authFlows: {
                 userPassword: true,
                 userSrp: true,
+                custom: true,
             },
             preventUserExistenceErrors: true,
         });

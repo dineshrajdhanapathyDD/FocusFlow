@@ -18,7 +18,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::466742534146:role/cdk-hnb659fds-deploy-role-466742534146-us-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::466742534146:role/cdk-hnb659fds-cfn-exec-role-466742534146-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-466742534146-us-east-1/637ad79a94cae0cc796240106b15597623109723f8d772d85df31be289786d71.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-466742534146-us-east-1/a942e61cedd56a96657275eb5bf6946cafd073a77c79535242ba7ffd718659d7.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -88,6 +88,84 @@
           {
             "type": "aws:cdk:logicalId",
             "data": "NotificationsTable76DCFC6C"
+          }
+        ],
+        "/FocusFlowStack/PreSignUpTrigger/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PreSignUpTriggerServiceRoleAB515258"
+          }
+        ],
+        "/FocusFlowStack/PreSignUpTrigger/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "PreSignUpTriggerCA35AAD7"
+          }
+        ],
+        "/FocusFlowStack/DefineAuthChallenge/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DefineAuthChallengeServiceRole1D83696B"
+          }
+        ],
+        "/FocusFlowStack/DefineAuthChallenge/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DefineAuthChallengeE7E3BC7B"
+          }
+        ],
+        "/FocusFlowStack/CreateAuthChallenge/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateAuthChallengeServiceRoleCE50EC04"
+          }
+        ],
+        "/FocusFlowStack/CreateAuthChallenge/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateAuthChallengeServiceRoleDefaultPolicy637265A4"
+          }
+        ],
+        "/FocusFlowStack/CreateAuthChallenge/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateAuthChallengeB2F8D873"
+          }
+        ],
+        "/FocusFlowStack/VerifyAuthChallenge/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VerifyAuthChallengeServiceRole0AEAA465"
+          }
+        ],
+        "/FocusFlowStack/VerifyAuthChallenge/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "VerifyAuthChallenge610ED36B"
+          }
+        ],
+        "/FocusFlowStack/UserPool/PreSignUpCognito": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolPreSignUpCognito3AFF8F1F"
+          }
+        ],
+        "/FocusFlowStack/UserPool/DefineAuthChallengeCognito": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolDefineAuthChallengeCognitoD6D10D9D"
+          }
+        ],
+        "/FocusFlowStack/UserPool/CreateAuthChallengeCognito": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolCreateAuthChallengeCognito07327B9A"
+          }
+        ],
+        "/FocusFlowStack/UserPool/VerifyAuthChallengeResponseCognito": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UserPoolVerifyAuthChallengeResponseCognito338D71F3"
           }
         ],
         "/FocusFlowStack/UserPool/Resource": [
